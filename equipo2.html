@@ -3,42 +3,36 @@
 <head>
   <meta charset="UTF-8">
   <title>Equipo 2 - Vigenère</title>
-  <script src="vigenere.js"></script>
   <style>
     body {
-      background-color: #e6f2fa; /* azul pastel claro */
+      background-color: #e6f2fa;
       margin: 0;
       padding: 0;
       text-align: center;
       font-family: Arial, sans-serif;
     }
-
     .contenedor {
       max-width: 900px;
       margin: 50px auto;
       padding: 20px;
     }
-
     .cuadro-texto, .cuadro-tabla {
       background-color: #ffffff;
-      border: 2px solid #8ac6d1; /* azul suave */
+      border: 2px solid #8ac6d1;
       border-radius: 10px;
       padding: 20px;
       margin-bottom: 30px;
       box-shadow: 0 0 10px rgba(0,0,0,0.1);
     }
-
     h2, h3 {
-      color: #5fa8d3; /* azul medio */
+      color: #5fa8d3;
     }
-
     p {
       color: #333;
       line-height: 1.6;
     }
-
     button {
-      background-color: #a8e6cf; /* verde menta */
+      background-color: #a8e6cf;
       color: #004d40;
       border: none;
       padding: 10px 20px;
@@ -47,33 +41,37 @@
       cursor: pointer;
       font-weight: bold;
     }
-
     button:hover {
-      background-color: #81c784; /* verde más intenso al pasar el cursor */
+      background-color: #81c784;
     }
-
     input {
       margin: 5px;
       padding: 8px;
       border-radius: 4px;
       border: 1px solid #8ac6d1;
     }
-
     .tabla-alfabeto {
       margin: 0 auto;
       border-collapse: collapse;
       width: 95%;
     }
-
     .tabla-alfabeto th, .tabla-alfabeto td {
       border: 1px solid #5fa8d3;
       padding: 8px;
       text-align: center;
     }
-
     .tabla-alfabeto th {
       background-color: #a8e6cf;
       color: #004d40;
+    }
+    #resultado {
+      background-color: #ffffff;
+      border: 2px solid #8ac6d1;
+      border-radius: 10px;
+      padding: 15px;
+      margin-top: 20px;
+      text-align: left;
+      white-space: pre-line;
     }
   </style>
 </head>
@@ -111,9 +109,63 @@
     <input type="text" id="clave" placeholder="Escribe tu clave">
     <button onclick="cifrar()">Cifrar</button>
     <button onclick="descifrar()">Descifrar</button>
-    <p id="resultado"></p>
+    <div id="resultado"></div>
 
     <button onclick="location.href='index.html'">Regresar al menú principal</button>
   </div>
+
+  <script>
+    const alfabeto = "ABCDEFGHIJKLMNÑOPQRSTUVWXYZ";
+
+    function cifrar() {
+      let mensaje = document.getElementById("mensaje").value.toUpperCase();
+      let clave = document.getElementById("clave").value.toUpperCase();
+      let resultado = "🔒 Procedimiento de cifrado:\n\n";
+      let textoFinal = "";
+      let j = 0;
+
+      for (let i = 0; i < mensaje.length; i++) {
+        let letra = mensaje[i];
+        if (alfabeto.includes(letra)) {
+          let posMensaje = alfabeto.indexOf(letra);
+          let posClave = alfabeto.indexOf(clave[j % clave.length]);
+          let nuevaPos = (posMensaje + posClave) % alfabeto.length;
+          let letraCifrada = alfabeto[nuevaPos];
+          resultado += `Letra: ${letra} (${posMensaje}) + Clave: ${clave[j % clave.length]} (${posClave}) = ${letraCifrada} (${nuevaPos})\n`;
+          textoFinal += letraCifrada;
+          j++;
+        } else {
+          textoFinal += letra;
+        }
+      }
+      resultado += `\n🔹 Texto cifrado final: ${textoFinal}`;
+      document.getElementById("resultado").innerText = resultado;
+    }
+
+    function descifrar() {
+      let mensaje = document.getElementById("mensaje").value.toUpperCase();
+      let clave = document.getElementById("clave").value.toUpperCase();
+      let resultado = "🔓 Procedimiento de descifrado:\n\n";
+      let textoFinal = "";
+      let j = 0;
+
+      for (let i = 0; i < mensaje.length; i++) {
+        let letra = mensaje[i];
+        if (alfabeto.includes(letra)) {
+          let posMensaje = alfabeto.indexOf(letra);
+          let posClave = alfabeto.indexOf(clave[j % clave.length]);
+          let nuevaPos = (posMensaje - posClave + alfabeto.length) % alfabeto.length;
+          let letraDescifrada = alfabeto[nuevaPos];
+          resultado += `Letra: ${letra} (${posMensaje}) - Clave: ${clave[j % clave.length]} (${posClave}) = ${letraDescifrada} (${nuevaPos})\n`;
+          textoFinal += letraDescifrada;
+          j++;
+        } else {
+          textoFinal += letra;
+        }
+      }
+      resultado += `\n🔹 Texto descifrado final: ${textoFinal}`;
+      document.getElementById("resultado").innerText = resultado;
+    }
+  </script>
 </body>
 </html>
