@@ -1,77 +1,72 @@
+/* Paleta de colores pasteles fríos */
+:root {
+  --color-fondo: #e6f0f8;   /* azul muy claro */
+  --color-principal: #a3c4dc; /* azul pastel */
+  --color-secundario: #c8d9e6; /* gris azulado */
+  --color-acento: #b8e0d2;   /* verde menta pastel */
+  --color-texto: #2f3e46;    /* gris oscuro para contraste */
+}
+
+/* Estilo general */
 body {
-  display: flex;
-  justify-content: center;   /* Centra horizontalmente */
-  align-items: center;       /* Centra verticalmente */
-  min-height: 100vh;         /* Ocupa toda la altura de la pantalla */
-  background-color: #f4f4f4;
+  font-family: 'Segoe UI', sans-serif;
+  background: var(--color-fondo);
+  color: var(--color-texto);
   margin: 0;
+  padding: 0;
+  text-align: center; /* centra todo el contenido por defecto */
+  transition: background 0.5s ease;
 }
 
-.contenedor {
-  display: flex;             /* Activa Flexbox */
-  flex-direction: column;    /* Coloca los elementos en columna */
-  align-items: center;       /* Centra horizontalmente los hijos */
-  justify-content: center;   /* Centra verticalmente los hijos */
-  max-width: 900px;
-  padding: 40px;
-  background-color: #fff;
-  border-radius: 10px;
-  box-shadow: 0 0 15px rgba(0,0,0,0.1);
-}
-
+/* Encabezados */
 h1, h2, h3 {
-  color: #007bff;
-  margin-bottom: 20px;
+  color: var(--color-principal);
+  margin: 20px 0;
+  animation: fadeInDown 1s ease;
 }
 
-p {
-  color: #333;
-  line-height: 1.6;
-  margin-bottom: 25px;
-}
-
+/* Botones */
 button {
-  background-color: #007bff;
-  color: white;
+  background: var(--color-acento);
   border: none;
-  padding: 10px 20px;
-  margin: 10px;
-  border-radius: 5px;
+  padding: 12px 20px;
+  border-radius: 8px;
+  color: var(--color-texto);
+  font-weight: bold;
   cursor: pointer;
+  margin: 15px auto; /* centrado con margen */
+  display: block; /* asegura que se centre */
+  transition: transform 0.3s ease, background 0.3s ease;
 }
 
 button:hover {
-  background-color: #0056b3;
+  background: var(--color-principal);
+  transform: scale(1.05);
 }
 
-input {
-  margin: 5px;
-  padding: 8px;
-  border-radius: 4px;
-  border: 1px solid #ccc;
-}
-
-#resultado {
-  margin-top: 20px;
-  background-color: #e9ecef;
-  padding: 10px;
-  border-radius: 5px;
-  text-align: left;
-}
-
-.tabla-alfabeto {
+/* Tarjetas */
+.card {
+  background: var(--color-secundario);
+  border-radius: 12px;
+  padding: 20px;
   margin: 20px auto;
-  border-collapse: collapse;
-  width: 95%;
+  max-width: 400px; /* tamaño controlado y centrado */
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  transition: transform 0.4s ease;
 }
 
-.tabla-alfabeto th, .tabla-alfabeto td {
-  border: 1px solid #000;
-  padding: 8px;
-  text-align: center;
+.card:hover {
+  transform: translateY(-5px);
 }
 
-.tabla-alfabeto th {
-  background-color: #007bff;
-  color: white;
+/* Animaciones */
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
