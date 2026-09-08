@@ -8,11 +8,14 @@ body {
 }
 
 .contenedor {
+  display: flex;             /* Activa Flexbox */
+  flex-direction: column;    /* Coloca los elementos en columna */
+  align-items: center;       /* Centra horizontalmente los hijos */
+  justify-content: center;   /* Centra verticalmente los hijos */
   max-width: 900px;
   padding: 40px;
   background-color: #fff;
   border-radius: 10px;
-  text-align: center;
   box-shadow: 0 0 15px rgba(0,0,0,0.1);
 }
 
