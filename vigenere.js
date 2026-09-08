@@ -13,6 +13,7 @@ function cifrar() {
     let letraCifrada = alfabeto[posCifrado];
     resultado += letraCifrada;
 
+    // Aquí se muestra el proceso paso a paso
     pasos += `Letra ${mensaje[i]} (${posMensaje}) + Clave ${clave[i % clave.length]} (${posClave}) = ${letraCifrada} (${posCifrado})<br>`;
   }
 
@@ -32,6 +33,7 @@ function descifrar() {
     let letraDescifrada = alfabeto[posDescifrado];
     resultado += letraDescifrada;
 
+    // Aquí se muestra el proceso paso a paso
     pasos += `Letra ${mensaje[i]} (${posCifrado}) - Clave ${clave[i % clave.length]} (${posClave}) = ${letraDescifrada} (${posDescifrado})<br>`;
   }
 
