@@ -1,13 +1,14 @@
 body {
-  font-family: Arial, sans-serif;
+  display: flex;
+  justify-content: center;   /* Centra horizontalmente */
+  align-items: center;       /* Centra verticalmente */
+  min-height: 100vh;         /* Ocupa toda la altura de la pantalla */
   background-color: #f4f4f4;
   margin: 0;
-  padding: 0;
 }
 
 .contenedor {
   max-width: 900px;
-  margin: 60px auto;
   padding: 40px;
   background-color: #fff;
   border-radius: 10px;
@@ -15,7 +16,7 @@ body {
   box-shadow: 0 0 15px rgba(0,0,0,0.1);
 }
 
-h2, h3 {
+h1, h2, h3 {
   color: #007bff;
   margin-bottom: 20px;
 }
