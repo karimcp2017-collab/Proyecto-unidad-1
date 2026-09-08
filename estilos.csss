@@ -1,12 +1,22 @@
 body {
   font-family: Arial, sans-serif;
-  text-align: center;
   background-color: #f4f4f4;
   margin: 0;
-  padding: 20px;
+  padding: 0;
 }
 
-h1, h2 {
+.contenedor {
+  max-width: 800px;
+  margin: 50px auto;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 10px;
+  text-align: center;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+h1, h2, h3, p {
+  margin-bottom: 20px;
   color: #333;
 }
 
@@ -33,9 +43,25 @@ input {
 
 #resultado {
   margin-top: 20px;
-  background-color: #fff;
+  background-color: #e9ecef;
   padding: 10px;
   border-radius: 5px;
-  display: inline-block;
   text-align: left;
 }
+
+.tabla-alfabeto {
+  margin: 20px auto;
+  border-collapse: collapse;
+  width: 60%;
+}
+
+.tabla-alfabeto th, .tabla-alfabeto td {
+  border: 1px solid #ccc;
+  padding: 8px;
+}
+
+.tabla-alfabeto th {
+  background-color: #007bff;
+  color: white;
+}
+
