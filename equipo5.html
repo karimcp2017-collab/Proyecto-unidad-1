@@ -1,22 +1,160 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Equipo 2</title>
-  <script src="vigenere.js"></script>
+  <title>Equipo 5</title>
   <link rel="stylesheet" href="estilos.css">
+  <style>
+    .tarjeta-blanca {
+      background-color: #ffffff;
+      border: 2px solid #5b9dbf; /* <-- Borde más oscuro y definido */
+      border-radius: 8px;
+      max-width: 800px;
+      margin: 40px auto; 
+      padding: 40px;
+      text-align: center; 
+      box-shadow: 0 6px 12px rgba(0,0,0,0.08); /* Sombra ligeramente más marcada */
+      font-family: Arial, sans-serif;
+    }
+    .tarjeta-blanca h2 {
+      color: #5b9dbf; 
+      margin-bottom: 30px;
+    }
+    .tarjeta-blanca h4 {
+      color: #333333;
+      margin-top: 25px;
+      margin-bottom: 15px;
+    }
+    .tarjeta-blanca p {
+      color: #444444;
+      line-height: 1.6;
+      margin-bottom: 15px;
+    }
+    .zona-prueba {
+      margin-top: 40px;
+      padding-top: 20px;
+      border-top: 1px solid #eeeeee;
+    }
+    .zona-prueba input {
+      padding: 10px;
+      margin-bottom: 15px;
+      width: 80%;
+      max-width: 400px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+    .grupo-botones {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      margin-bottom: 25px;
+    }
+    .grupo-botones button {
+      padding: 8px 20px;
+      cursor: pointer;
+    }
+    #resultado {
+      background-color: #f4f6f8;
+      border: 1px solid #ced4da;
+      border-radius: 4px;
+      padding: 15px;
+      min-height: 24px;
+      color: #333;
+      font-family: monospace;
+      font-size: 16px;
+      word-break: break-all;
+      max-width: 500px;
+      margin: 0 auto;
+    }
+  </style>
 </head>
 <body>
-  <h2>Equipo 2 - Método asignado</h2>
-  <p>Aquí el equipo 2 debe escribir su investigación sobre su método.</p>
 
-  <h3>Prueba del programa</h3>
-  <input type="text" id="mensaje" placeholder="Escribe tu mensaje">
-  <input type="text" id="clave" placeholder="Escribe tu clave">
-  <button onclick="cifrar()">Cifrar</button>
-  <button onclick="descifrar()">Descifrar</button>
-  <p id="resultado"></p>
+  <div class="tarjeta-blanca">
+    <h2>Equipo 5 - Método Atbash</h2>
 
-  <!-- Botón de regreso -->
-  <button onclick="location.href='index.html'">Regresar al menú principal</button>
+    <h4>Antecedentes</h4>
+    <p>El cifrado Atbash es uno de los métodos criptográficos más antiguos conocidos, originado en el Medio Oriente alrededor del año 500 a.C. Fue desarrollado por eruditos hebreos y se utilizó originalmente para cifrar el alfabeto arameo y hebreo. Su uso más famoso se encuentra en la Biblia, específicamente en el Libro de Jeremías, donde palabras como "Babel" se cifraron como "Sheshakh".</p>
+
+    <h4>¿Cómo funciona?</h4>
+    <p>Funciona invirtiendo el alfabeto de forma simétrica (la A se convierte en Z, la B en Y, etc.). Se asigna un número a cada letra del abecedario. En el caso del abecedario español, se usan 27 letras (de A a Z, incluyendo la Ñ), numeradas del 0 al 26.</p>
+
+    <p>El cifrado y descifrado se realizan con la misma fórmula matemática (función involutiva):</p>
+    <p><em>Posición Invertida = 26 - x (mod 27)</em></p>
+
+    <h4>Donde:</h4>
+    <p>x: Es la posición de la letra del texto original en el alfabeto.</p>
+
+    <h4>¿Por qué no hay clave?</h4>
+    <p>A diferencia de otros métodos criptográficos, Atbash no requiere que el usuario ingrese una clave secreta. Esto se debe a que es un algoritmo simétrico de espejo: se aplica exactamente la misma regla de inversión tanto para el proceso de cifrado como para el de descifrado.</p>
+
+    <div class="zona-prueba">
+      <h3>Prueba del programa</h3>
+      <input type="text" id="textoEntrada" placeholder="Escribe tu mensaje">
+      
+      <div class="grupo-botones">
+        <button id="btnCifrar">Cifrar</button>
+        <button id="btnDescifrar">Descifrar</button>
+        <button id="btnLimpiar">Limpiar</button>
+      </div>
+      
+      <p id="resultado">Esperando mensaje...</p>
+    </div>
+
+    <br>
+    <button onclick="location.href='index.html'">Regresar al menú principal</button>
+  </div>
+
+  <script>
+    const alfabetoEspanol = "ABCDEFGHIJKLMNÑOPQRSTUVWXYZ";
+
+    function procesarAtbash(textoEntrada) {
+      let resultadoFinal = "";
+      const textoMayusculas = textoEntrada.toUpperCase();
+      const totalLetras = alfabetoEspanol.length;
+
+      for (let i = 0; i < textoMayusculas.length; i++) {
+        const caracterActual = textoMayusculas[i];
+        const posicionActual = alfabetoEspanol.indexOf(caracterActual);
+
+        if (posicionActual !== -1) {
+          const posicionInvertida = (totalLetras - 1) - posicionActual;
+          resultadoFinal += alfabetoEspanol[posicionInvertida];
+        } else {
+          resultadoFinal += caracterActual;
+        }
+      }
+
+      return resultadoFinal;
+    }
+
+    const inputTexto = document.getElementById('textoEntrada');
+    const btnCifrar = document.getElementById('btnCifrar');
+    const btnDescifrar = document.getElementById('btnDescifrar');
+    const btnLimpiar = document.getElementById('btnLimpiar');
+    const divResultado = document.getElementById('resultado');
+
+    btnCifrar.addEventListener('click', () => {
+      const texto = inputTexto.value.trim();
+      if (!texto) {
+        divResultado.innerText = "[!] Error: Ingresa un mensaje.";
+        return;
+      }
+      divResultado.innerText = procesarAtbash(texto);
+    });
+
+    btnDescifrar.addEventListener('click', () => {
+      const texto = inputTexto.value.trim();
+      if (!texto) {
+        divResultado.innerText = "[!] Error: Ingresa un mensaje para descifrar.";
+        return;
+      }
+      divResultado.innerText = procesarAtbash(texto);
+    });
+
+    btnLimpiar.addEventListener('click', () => {
+      inputTexto.value = '';
+      divResultado.innerText = 'Esperando mensaje...';
+    });
+  </script>
 </body>
 </html>
