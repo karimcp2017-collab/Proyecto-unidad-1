@@ -2,72 +2,80 @@
 <html lang="es">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>Equipo 4 - Escítala Espartana</title>
+    <title>Equipo 4 - Escítala Espartana</title>
 
-  <!-- Archivo JavaScript -->
-  <script src="Cifradoescitala.js"></script>
+    <!-- JavaScript -->
+    <script src="Cifradoescitala.js" defer></script>
 
-  <!-- Archivo CSS -->
-  <link rel="stylesheet" href="estilos.css">
+    <!-- CSS -->
+    <link rel="stylesheet" href="estilos.css">
 </head>
 
 <body>
 
-  <h2>Equipo 4 - Escítala Espartana</h2>
+    <h2>Equipo 4 - Escítala Espartana</h2>
 
-  <p>
-    Aquí el equipo 4 debe escribir su investigación sobre su método.
-  </p>
+    <p>
+        La Escítala Espartana es un método de cifrado basado en escribir
+        el mensaje en filas y leerlo por columnas.
+    </p>
 
-  <img
-    src="https://nosolomates.es/web/imagenes/escitala.gif"
-    alt="Escítala espartana"
-    width="500"
-  >
+    <img
+        src="https://nosolomates.es/web/imagenes/escitala.gif"
+        alt="Escítala espartana"
+        width="500"
+    >
 
-  <h3>Prueba del programa</h3>
+    <h3>Prueba del programa</h3>
 
-  <label for="mensaje">Mensaje:</label>
-  <br>
+    <label for="mensaje">Mensaje:</label>
+    <br>
 
-  <input
-    type="text"
-    id="mensaje"
-    placeholder="Escribe tu mensaje"
-  >
+    <input
+        type="text"
+        id="mensaje"
+        placeholder="Escribe tu mensaje"
+    >
 
-  <br><br>
+    <br><br>
 
-  <label for="clave">Clave:</label>
-  <br>
+    <label for="clave">Clave (número de columnas):</label>
+    <br>
 
-  <input
-    type="number"
-    id="clave"
-    min="1"
-    step="1"
-    placeholder="Ejemplo: 3"
-  >
+    <input
+        type="number"
+        id="clave"
+        min="1"
+        step="1"
+        placeholder="Ejemplo: 4"
+    >
 
-  <br><br>
+    <br><br>
 
-  <button onclick="cifrar()">Cifrar</button>
+    <button type="button" id="btnCifrar">
+        Cifrar
+    </button>
 
-  <button onclick="descifrar()">Descifrar</button>
+    <button type="button" id="btnDescifrar">
+        Descifrar
+    </button>
 
-  <br><br>
+    <br><br>
 
-<div id="resultado"></div>
-  <br>
+    <div id="resultado"></div>
 
-  <button onclick="location.href='index.html'">
-    Regresar al menú principal
-  </button>
+    <br>
+
+    <button
+        type="button"
+        onclick="location.href='index.html'"
+    >
+        Regresar al menú principal
+    </button>
 
 </body>
 
 </html>
-
