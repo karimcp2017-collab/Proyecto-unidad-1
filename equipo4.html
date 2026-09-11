@@ -1,36 +1,53 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <link rel="stylesheet" href="estilos.css">
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Equipo 4 - Escítala Espartana</title>
 </head>
+
 <body>
 
     <h2>Escítala Espartana</h2>
 
     <!-- Entrada de mensaje -->
     <label for="mensaje">Mensaje:</label>
-    <input type="text" id="mensaje" placeholder="Escribe tu mensaje aquí">
+    <input
+        type="text"
+        id="mensaje"
+        placeholder="Escribe tu mensaje aquí"
+    >
 
     <br><br>
 
     <!-- Entrada de la clave -->
     <label for="clave">Clave (columnas):</label>
-    <input type="number" id="clave" min="1" placeholder="Ej. 4">
+    <input
+        type="number"
+        id="clave"
+        min="1"
+        step="1"
+        placeholder="Ej. 4"
+    >
 
     <br><br>
 
-    <!-- Botones con los IDs requeridos -->
+    <!-- Botones -->
     <button id="btnCifrar">Cifrar</button>
     <button id="btnDescifrar">Descifrar</button>
 
     <hr>
 
-    <!-- Contenedor donde se dibuja la tabla y el resultado -->
-<p id="resultado"></p>
-    <!-- Enlace al archivo JS -->
+    <!-- Contenedor donde se muestra el proceso y resultado -->
+    <div id="resultado"></div>
+
+    <!-- Archivo JavaScript -->
     <script src="Cifradoescitala.js"></script>
+
 </body>
+
 </html>
 
