@@ -1,42 +1,29 @@
 function cifrar() {
-
     let mensaje = document.getElementById("mensaje").value;
     let columnas = parseInt(document.getElementById("clave").value, 10);
 
-    let resultado = "";
-    let pasos = "";
-
-    // Comprobar que la clave sea válida
     if (isNaN(columnas) || columnas < 1) {
         document.getElementById("resultado").innerHTML =
             "<b>Error:</b> La clave debe ser un número entero mayor o igual a 1.";
         return;
     }
 
-    // Calcular número de filas
-    let filas = Math.ceil(mensaje.length / columnas);
-
-    // Crear matriz
-    let matriz = [];
-
-    for (let i = 0; i < filas; i++) {
-        matriz[i] = [];
-
-        for (let j = 0; j < columnas; j++) {
-            matriz[i][j] = "";
-        }
+    if (mensaje.length === 0) {
+        document.getElementById("resultado").innerHTML = "<b>Error:</b> Ingrese un mensaje.";
+        return;
     }
 
-    // ------------------------------------------------
-    // ESCRIBIR MENSAJE POR FILAS
-    // ------------------------------------------------
+    let filas = Math.ceil(mensaje.length / columnas);
+    let resultado = "";
+    let pasos = "";
 
+    // 1. Crear matriz vacía
+    let matriz = Array.from({ length: filas }, () => Array(columnas).fill(""));
+
+    // 2. Escribir mensaje por FILAS
     let indice = 0;
-
     for (let i = 0; i < filas; i++) {
-
         for (let j = 0; j < columnas; j++) {
-
             if (indice < mensaje.length) {
                 matriz[i][j] = mensaje[indice];
                 indice++;
@@ -44,175 +31,90 @@ function cifrar() {
         }
     }
 
-    pasos += "<b>Matriz:</b><br>";
-
+    // Dibujar matriz en pasos
+    pasos += "<b>Matriz armada por filas:</b><br>";
     for (let i = 0; i < filas; i++) {
-
         for (let j = 0; j < columnas; j++) {
-
-            if (matriz[i][j] === "") {
-                pasos += "□ ";
-            } else {
-                pasos += matriz[i][j] + " ";
-            }
+            pasos += (matriz[i][j] === "" ? "□" : matriz[i][j]) + " ";
         }
-
         pasos += "<br>";
     }
 
+    // 3. Leer mensaje por COLUMNAS (Texto Cifrado)
     pasos += "<br><b>Lectura por columnas:</b><br>";
-
-    // ------------------------------------------------
-    // LEER MATRIZ POR COLUMNAS
-    // ------------------------------------------------
-
     for (let j = 0; j < columnas; j++) {
-
         for (let i = 0; i < filas; i++) {
-
             if (matriz[i][j] !== "") {
-
                 resultado += matriz[i][j];
-
-                pasos +=
-                    "Se toma '" +
-                    matriz[i][j] +
-                    "' de fila " +
-                    (i + 1) +
-                    ", columna " +
-                    (j + 1) +
-                    "<br>";
+                pasos += `Tomando '${matriz[i][j]}' de fila ${i + 1}, columna ${j + 1}<br>`;
             }
         }
     }
 
     document.getElementById("resultado").innerHTML =
-        "<b>Cifrado Escítala:</b> " +
-        resultado +
-        "<br><br>" +
-        "<b>Proceso:</b><br>" +
-        pasos;
+        "<b>Cifrado Escítala:</b> " + resultado + "<br><br><b>Proceso:</b><br>" + pasos;
 }
 
 
 function descifrar() {
-
     let mensaje = document.getElementById("mensaje").value;
     let columnas = parseInt(document.getElementById("clave").value, 10);
 
-    let resultado = "";
-    let pasos = "";
-
-    // Comprobar que la clave sea válida
     if (isNaN(columnas) || columnas < 1) {
         document.getElementById("resultado").innerHTML =
             "<b>Error:</b> La clave debe ser un número entero mayor o igual a 1.";
         return;
     }
 
-    // Calcular número de filas
-    let filas = Math.ceil(mensaje.length / columnas);
-
-    // Calcular sobrante
-    let resto = mensaje.length % columnas;
-
-    // Crear matriz
-    let matriz = [];
-
-    for (let i = 0; i < filas; i++) {
-
-        matriz[i] = [];
-
-        for (let j = 0; j < columnas; j++) {
-            matriz[i][j] = "";
-        }
+    if (mensaje.length === 0) {
+        document.getElementById("resultado").innerHTML = "<b>Error:</b> Ingrese un mensaje.";
+        return;
     }
 
-    pasos += "<b>Colocación del texto cifrado:</b><br>";
+    let filas = Math.ceil(mensaje.length / columnas);
+    let resto = mensaje.length % columnas; // Huecos ocupados en la última fila
+    let resultado = "";
+    let pasos = "";
 
+    let matriz = Array.from({ length: filas }, () => Array(columnas).fill(""));
+
+    // 1. Colocar el texto cifrado por COLUMNAS
     let indice = 0;
-
-    // ------------------------------------------------
-    // COLOCAR TEXTO CIFRADO POR COLUMNAS
-    // ------------------------------------------------
+    pasos += "<b>Colocación por columnas:</b><br>";
 
     for (let j = 0; j < columnas; j++) {
+        // Si hay resto, las primeras 'resto' columnas tienen 'filas' elementos, el resto tiene 'filas - 1'
+        let filasEnEstaColumna = (resto === 0 || j < resto) ? filas : filas - 1;
 
-        let cantidadFilas;
-
-        if (resto === 0) {
-            cantidadFilas = filas;
-        } else {
-            cantidadFilas = (j < resto) ? filas : filas - 1;
-        }
-
-        for (let i = 0; i < cantidadFilas; i++) {
-
+        for (let i = 0; i < filasEnEstaColumna; i++) {
             if (indice < mensaje.length) {
-
                 matriz[i][j] = mensaje[indice];
-
-                pasos +=
-                    "Se coloca '" +
-                    mensaje[indice] +
-                    "' en fila " +
-                    (i + 1) +
-                    ", columna " +
-                    (j + 1) +
-                    "<br>";
-
+                pasos += `Colocando '${mensaje[indice]}' en fila ${i + 1}, columna ${j + 1}<br>`;
                 indice++;
             }
         }
     }
 
-    pasos += "<br><b>Matriz recuperada:</b><br>";
-
+    // Dibujar matriz recuperada
+    pasos += "<br><b>Matriz reconstruida:</b><br>";
     for (let i = 0; i < filas; i++) {
-
         for (let j = 0; j < columnas; j++) {
-
-            if (matriz[i][j] === "") {
-                pasos += "□ ";
-            } else {
-                pasos += matriz[i][j] + " ";
-            }
+            pasos += (matriz[i][j] === "" ? "□" : matriz[i][j]) + " ";
         }
-
         pasos += "<br>";
     }
 
-    pasos += "<br><b>Lectura por filas:</b><br>";
-
-    // ------------------------------------------------
-    // LEER MATRIZ POR FILAS
-    // ------------------------------------------------
-
+    // 2. Leer mensaje por FILAS (Texto Original)
+    pasos += "<br><b>Lectura por filas (Original):</b><br>";
     for (let i = 0; i < filas; i++) {
-
         for (let j = 0; j < columnas; j++) {
-
             if (matriz[i][j] !== "") {
-
                 resultado += matriz[i][j];
-
-                pasos +=
-                    "Se recupera '" +
-                    matriz[i][j] +
-                    "' de fila " +
-                    (i + 1) +
-                    ", columna " +
-                    (j + 1) +
-                    "<br>";
+                pasos += `Recuperando '${matriz[i][j]}' de fila ${i + 1}, columna ${j + 1}<br>`;
             }
         }
     }
 
     document.getElementById("resultado").innerHTML =
-        "<b>Descifrado Escítala:</b> " +
-        resultado +
-        "<br><br>" +
-        "<b>Proceso:</b><br>" +
-        pasos;
+        "<b>Descifrado Escítala:</b> " + resultado + "<br><br><b>Proceso:</b><br>" + pasos;
 }
-
