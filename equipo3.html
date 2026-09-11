@@ -7,7 +7,69 @@
 </head>
 <body>
   <h2>Equipo 3 - Cifrado Cesar</h2>
-  <p>Aquí el equipo 3 debe escribir su investigación sobre su método.</p>
+  <p>  Antecedentes Históricos
+El Cifrado César es considerado una de las técnicas de criptografía más antiguas y representativas de la historia militar y política de la antigüedad. Su nombre rinde homenaje al estadista y general romano Julio César (100 a. C. – 44 a. C.), quien, de acuerdo con los registros del historiador romano Cayo Suetonio Tranquilo en su obra De vita Caesarum (Las vidas de los doce césares), utilizaba este sistema para proteger la correspondencia confidencial enviada a sus legiones y oficiales durante las Campañas de las Galias (alrededor del 58 a. C.).
+En la Roma antigua, la comunicación mediante mensajeros a caballo implicaba un alto riesgo de interceptación por parte de ejércitos enemigos o bandas de salteadores. Julio César adoptó una regla de sustitución fija basada en un desplazamiento de tres posiciones (k=3) sobre el alfabeto latino clásico (que en ese momento contaba con 21 letras, omitiendo letras como la J, U, W, Y, Z).
+Aunque hoy en día la técnica resulta elemental, en el siglo I a. C. garantizó una efectividad casi absoluta. La razón principal estriba en que la gran mayoría de los adversarios de Roma eran analfabetos y carecían de concepciones matemáticas sobre la codificación lingüística; aquellos pocos que sabían leer interpretaban las letras cifradas como palabras escritas en una lengua bárbara o desconocida.
+    
+  Principio de Funcionamiento
+El principio de funcionamiento del Cifrado César se fundamenta en la permutación por desplazamiento uniforme. Cada carácter del mensaje original (texto claro) es desplazado secuencialmente un número fijo de posiciones (k) a lo largo de un alfabeto de referencia predefinido.
+El comportamiento del algoritmo sigue tres reglas operativas clave:
+1.	Desplazamiento Constante: El parámetro k se aplica exactamente de la misma forma a cada una de las letras del mensaje.
+2.	Ciclicidad Aritmética (Módulo): Al alcanzar el límite superior del alfabeto (por ejemplo, al desplazar la última letra, la 'Z'), el conteo recomienza desde la primera posición ('A'). Esto se logra mediante la operación matemática de módulo sobre el tamaño del alfabeto (N).
+3.	Preservación de Caracteres No Alphabéticos: Por estándar técnico en implementación de software, los espacios en blanco, signos de puntuación, números y símbolos especiales suelen conservarse sin alteración dentro de la cadena cifrada para mantener la estructura legible del mensaje.
+
+    Proceso de Cifrado
+Para procesar el algoritmo de forma algorítmica y matemática, se realiza una asignación numérica secuencial a cada elemento del alfabeto, mapeándolo a un número entero en el rango de 0 a N−1:
+Alfabeto: [A=0,B=1,C=2,D=3,E=4,…,Z=25]
+Dado un carácter original en el texto claro representado por su índice numérico P y una clave k, el valor transformado C se obtiene formalmente mediante la ecuación:
+C=(P+k)(modN)
+
+Ejemplo Demostrativo de Cifrado:
+•	Mensaje Original (P): SEGURIDAD
+•	Clave (k): 5
+•	Alfabeto (N): 26 (Inglés estándar, sin 'Ñ')
+Letra (P)	Valor Numérico 
+(P)            	Operación (P+5)(mod26)
+	Nuevo Valor (C)	Letra Cifrada (C)
+
+S	18	(18+5)=23(mod26)	23	X
+E	4	(4+5)=9(mod26)	9	J
+G	6	(6+5)=11(mod26)	11	L
+U	20	(20+5)=25(mod26)	25	Z
+R	17	(17+5)=22(mod26)	22	W
+I	8	(8+5)=13(mod26)	13	N
+D	3	(3+5)=8(mod26)	8	I
+A	0	(0+5)=5(mod26)	5	F
+D	3	(3+5)=8(mod26)	8	I
+•	Texto Cifrado resultante: XJLZWNIFI
+
+ Proceso de Descifrado
+El proceso de descifrado es la transformación inversa. Consiste en desplazar en sentido contrario (hacia la izquierda) cada carácter del texto cifrado C empleando la misma clave k.
+La formulación algebraica para la recuperación del valor numérico del carácter original P es:
+P=(C−k)(modN)
+(Nota de implementación: En lenguajes de programación como Python o Java, si la resta (C−k) genera un resultado negativo, la regla del operador residuo/módulo maneja o requiere ajustar sumando N para mantener el resultado dentro del rango positivo [0,N−1]).
+Demostración Matemático-Formal de Reversibilidad:
+Se requiere demostrar que Descifrar(Cifrar(Mensaje))=Mensaje Original.
+1.	Sea C=(P+k)(modN).
+2.	Sustituyendo C en la fórmula de descifrado:
+Precuperado =((P+k)−k)(modN)
+3.	Simplificando los términos algebraicos internos:
+Precuperado =(P+0)(modN)=P(modN)
+4.	Dado que 0≤P<N, se cumple rigurosamente que Precuperado =P.
+Ejemplo de Descifrado:
+•	Texto Cifrado (C): XJLZWNIFI | Clave (k): 5
+•	X (C=23) →(23−5)(mod26)=18→ S
+•	J (C=9) →(9−5)(mod26)=4→ E
+•	L (C=11) →(11−5)(mod26)=6→ G
+•	Z (C=25) →(25−5)(mod26)=20→ U
+•	W (C=22) →(22−5)(mod26)=17→ R
+•	N (C=13) →(13−5)(mod26)=8→ I
+•	I (C=8) →(8−5)(mod26)=3→ D
+•	F (C=5) →(5−5)(mod26)=0→ A
+•	I (C=8) →(8−5)(mod26)=3→ D
+•	Texto Recuperado: SEGURIDAD
+</p>
 
   <h3>Prueba del programa</h3>
   <input type="text" id="mensaje" placeholder="Escribe tu mensaje">
