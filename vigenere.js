@@ -1,154 +1,63 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-  <meta charset="UTF-8">
-  <title>Equipo 2 - Vigenère</title>
-  <style>
-    body {
-      background-color: #e6f2fa;
-      margin: 0;
-      padding: 0;
-      text-align: center;
-      font-family: Arial, sans-serif;
-    }
-    .contenedor {
-      max-width: 900px;
-      margin: 50px auto;
-      padding: 20px;
-    }
-    .cuadro-texto, .cuadro-tabla {
-      background-color: #ffffff;
-      border: 2px solid #8ac6d1;
-      border-radius: 10px;
-      padding: 20px;
-      margin-bottom: 30px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
-    }
-    h2, h3 {
-      color: #5fa8d3;
-    }
-    p {
-      color: #333;
-      line-height: 1.6;
-    }
-    button {
-      background-color: #a8e6cf;
-      color: #004d40;
-      border: none;
-      padding: 10px 20px;
-      margin: 10px;
-      border-radius: 8px;
-      cursor: pointer;
-      font-weight: bold;
-    }
-    button:hover {
-      background-color: #81c784;
-    }
-    input {
-      margin: 5px;
-      padding: 8px;
-      border-radius: 4px;
-      border: 1px solid #8ac6d1;
-    }
-    .tabla-alfabeto {
-      margin: 0 auto;
-      border-collapse: collapse;
-      width: 95%;
-    }
-    .tabla-alfabeto th, .tabla-alfabeto td {
-      border: 1px solid #5fa8d3;
-      padding: 8px;
-      text-align: center;
-    }
-    .tabla-alfabeto th {
-      background-color: #a8e6cf;
-      color: #004d40;
-    }
-  </style>
-</head>
-<body>
-  <div class="contenedor">
-    <div class="cuadro-texto">
-      <h2>Equipo 2 - Método Vigenère</h2>
-      <p>
-        El cifrado de Vigenère fue creado en 1553 por Giovan Battista Bellaso en Italia. 
-        En 1586, Blaise de Vigenère desarrolló una versión muy similar en Francia, que 
-        terminó popularizándose con su nombre. Durante siglos se pensó que era imposible 
-        de romper, hasta que Charles Babbage y Friedrich Kasiski demostraron que podía 
-        descifrarse mediante análisis matemáticos y estadísticos.
-      </p>
-    </div>
+const alfabeto = "ABCDEFGHIJKLMNÑOPQRSTUVWXYZ";
 
-    <div class="cuadro-tabla">
-      <h3>Tabla del abecedario</h3>
-      <table class="tabla-alfabeto">
-        <tr>
-          <th>A</th><th>B</th><th>C</th><th>D</th><th>E</th><th>F</th><th>G</th><th>H</th><th>I</th><th>J</th>
-          <th>K</th><th>L</th><th>M</th><th>N</th><th>Ñ</th><th>O</th><th>P</th><th>Q</th><th>R</th><th>S</th>
-          <th>T</th><th>U</th><th>V</th><th>W</th><th>X</th><th>Y</th><th>Z</th>
-        </tr>
-        <tr>
-          <td>0</td><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td><td>6</td><td>7</td><td>8</td><td>9</td>
-          <td>10</td><td>11</td><td>12</td><td>13</td><td>14</td><td>15</td><td>16</td><td>17</td><td>18</td><td>19</td>
-          <td>20</td><td>21</td><td>22</td><td>23</td><td>24</td><td>25</td><td>26</td>
-        </tr>
-      </table>
-    </div>
+function cifrar() {
+  let mensaje = document.getElementById("mensaje").value.toUpperCase();
+  let clave = document.getElementById("clave").value.toUpperCase();
 
-    <h3>Prueba del programa</h3>
-    <input type="text" id="mensaje" placeholder="Escribe tu mensaje">
-    <input type="text" id="clave" placeholder="Escribe tu clave">
-    <button onclick="cifrar()">Cifrar</button>
-    <button onclick="descifrar()">Descifrar</button>
-    <p id="resultado"></p>
+  if (clave.length === 0) {
+    document.getElementById("resultado").innerText = "⚠️ Ingresa una clave válida.";
+    return;
+  }
 
-    <button onclick="location.href='index.html'">Regresar al menú principal</button>
-  </div>
+  let resultado = "";
+  let j = 0;
 
-  <script>
-    const alfabeto = "ABCDEFGHIJKLMNÑOPQRSTUVWXYZ";
-
-    function cifrar() {
-      let mensaje = document.getElementById("mensaje").value.toUpperCase();
-      let clave = document.getElementById("clave").value.toUpperCase();
-      let resultado = "";
-      let j = 0;
-
-      for (let i = 0; i < mensaje.length; i++) {
-        let letra = mensaje[i];
-        if (alfabeto.includes(letra)) {
-          let posMensaje = alfabeto.indexOf(letra);
-          let posClave = alfabeto.indexOf(clave[j % clave.length]);
-          let nuevaPos = (posMensaje + posClave) % alfabeto.length;
-          resultado += alfabeto[nuevaPos];
-          j++;
-        } else {
-          resultado += letra;
-        }
+  for (let i = 0; i < mensaje.length; i++) {
+    let letra = mensaje[i];
+    if (alfabeto.includes(letra)) {
+      let posMensaje = alfabeto.indexOf(letra);
+      let posClave = alfabeto.indexOf(clave[j % clave.length]);
+      if (posClave === -1) {
+        document.getElementById("resultado").innerText = "⚠️ La clave contiene caracteres inválidos.";
+        return;
       }
-      document.getElementById("resultado").innerText = "Texto cifrado: " + resultado;
+      let nuevaPos = (posMensaje + posClave) % alfabeto.length;
+      resultado += alfabeto[nuevaPos];
+      j++;
+    } else {
+      resultado += letra;
     }
+  }
+  document.getElementById("resultado").innerText = "🔒 Texto cifrado: " + resultado;
+}
 
-    function descifrar() {
-      let mensaje = document.getElementById("mensaje").value.toUpperCase();
-      let clave = document.getElementById("clave").value.toUpperCase();
-      let resultado = "";
-      let j = 0;
+function descifrar() {
+  let mensaje = document.getElementById("mensaje").value.toUpperCase();
+  let clave = document.getElementById("clave").value.toUpperCase();
 
-      for (let i = 0; i < mensaje.length; i++) {
-        let letra = mensaje[i];
-        if (alfabeto.includes(letra)) {
-          let posMensaje = alfabeto.indexOf(letra);
-          let posClave = alfabeto.indexOf(clave[j % clave.length]);
-          let nuevaPos = (posMensaje - posClave + alfabeto.length) % alfabeto.length;
-          resultado += alfabeto[nuevaPos];
-          j++;
-        } else {
-          resultado += letra;
-        }
+  if (clave.length === 0) {
+    document.getElementById("resultado").innerText = "⚠️ Ingresa una clave válida.";
+    return;
+  }
+
+  let resultado = "";
+  let j = 0;
+
+  for (let i = 0; i < mensaje.length; i++) {
+    let letra = mensaje[i];
+    if (alfabeto.includes(letra)) {
+      let posMensaje = alfabeto.indexOf(letra);
+      let posClave = alfabeto.indexOf(clave[j % clave.length]);
+      if (posClave === -1) {
+        document.getElementById("resultado").innerText = "⚠️ La clave contiene caracteres inválidos.";
+        return;
       }
-      document.getElementById("resultado").innerText = "Texto descifrado: " + resultado;
+      let nuevaPos = (posMensaje - posClave + alfabeto.length) % alfabeto.length;
+      resultado += alfabeto[nuevaPos];
+      j++;
+    } else {
+      resultado += letra;
     }
-  </script>
-</body>
-</html>
+  }
+  document.getElementById("resultado").innerText = "🔓 Texto descifrado: " + resultado;
+}
