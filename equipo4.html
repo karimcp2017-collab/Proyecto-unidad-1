@@ -13,6 +13,120 @@
 
     <h2>Escítala Espartana</h2>
 
+    <h3>Antecedentes</h3>
+
+    <p>
+        La Escítala Espartana es uno de los métodos de cifrado más antiguos
+        conocidos. Fue utilizada en la antigua Esparta, principalmente por
+        los militares, para enviar mensajes de manera que no pudieran ser
+        comprendidos fácilmente si eran interceptados.
+    </p>
+
+    <p>
+        El método utilizaba una vara o cilindro alrededor del cual se enrollaba
+        una tira de material. El mensaje se escribía sobre la tira siguiendo
+        las líneas formadas por la vara. Al desenrollarla, las letras quedaban
+        desordenadas y el mensaje no podía leerse directamente.
+    </p>
+
+
+    <h3>¿Cómo funciona?</h3>
+
+    <p>
+        La Escítala es un método de transposición. A diferencia de otros
+        métodos de cifrado, no cambia las letras del mensaje, sino que cambia
+        el orden en el que aparecen.
+    </p>
+
+    <p>
+        En nuestro programa, la vara se representa mediante una matriz.
+        La clave indica el número de columnas que tendrá la matriz.
+    </p>
+
+    <p>
+        El proceso de cifrado se realiza de la siguiente manera:
+    </p>
+
+    <p>
+        1. Se introduce el mensaje original.<br>
+        2. Se establece el número de columnas mediante la clave.<br>
+        3. El mensaje se escribe en la matriz por filas.<br>
+        4. La matriz se lee por columnas para obtener el mensaje cifrado.
+    </p>
+
+    <p>
+        Para descifrar se realiza el proceso inverso: el mensaje cifrado
+        se coloca por columnas y después se lee por filas para recuperar
+        el mensaje original.
+    </p>
+
+
+    <h3>Ejemplo</h3>
+
+    <p>
+        Si tenemos el mensaje:
+    </p>
+
+    <p>
+        <b>HOLA</b>
+    </p>
+
+    <p>
+        y utilizamos una clave de <b>2 columnas</b>, la matriz queda:
+    </p>
+
+    <p>
+        H | O<br>
+        L | A
+    </p>
+
+    <p>
+        Al leer las columnas obtenemos:
+    </p>
+
+    <p>
+        H → L → O → A
+    </p>
+
+    <p>
+        Por lo tanto, el mensaje cifrado es:
+    </p>
+
+    <p>
+        <b>HLOA</b>
+    </p>
+
+
+    <h3>Proceso de descifrado</h3>
+
+    <p>
+        Para descifrar <b>HLOA</b> con una clave de 2 columnas, primero
+        se coloca el texto cifrado por columnas:
+    </p>
+
+    <p>
+        H | O<br>
+        L | A
+    </p>
+
+    <p>
+        Después se lee la matriz por filas:
+    </p>
+
+    <p>
+        H → O → L → A
+    </p>
+
+    <p>
+        Obteniendo nuevamente el mensaje original:
+    </p>
+
+    <p>
+        <b>HOLA</b>
+    </p>
+
+
+
     <!-- Entrada de mensaje -->
     <label for="mensaje">Mensaje:</label>
     <input
