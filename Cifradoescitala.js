@@ -126,25 +126,17 @@ function cifrar() {
 }
 
 
-// ==========================================
-// DESCIFRAR MENSAJE
-// ==========================================
-
 function descifrar() {
 
-    const mensaje = document
-        .getElementById("mensaje")
-        .value
-        .replace(/\s/g, "");
-
-    const columnas = parseInt(
+    let mensaje = document.getElementById("mensaje").value;
+    let columnas = parseInt(
         document.getElementById("clave").value,
         10
     );
 
     // Comprobar mensaje
-    if (mensaje === "") {
-        alert("Escribe un mensaje cifrado.");
+    if (mensaje.trim() === "") {
+        alert("Escribe el mensaje cifrado.");
         return;
     }
 
@@ -154,70 +146,74 @@ function descifrar() {
         return;
     }
 
-    // Número de filas
+    // Eliminar espacios
+    mensaje = mensaje.replace(/\s/g, "");
+
+    // La clave no puede ser mayor que el mensaje
+    if (columnas > mensaje.length) {
+        alert("La clave no puede ser mayor que el número de caracteres.");
+        return;
+    }
+
+    // ==========================================
+    // CALCULAR FILAS
+    // ==========================================
+
     const filas = Math.ceil(mensaje.length / columnas);
 
-    // ------------------------------------------
+    // ==========================================
     // CREAR TABLA VACÍA
-    // ------------------------------------------
+    // ==========================================
 
     let tabla = [];
 
     for (let fila = 0; fila < filas; fila++) {
-
         tabla[fila] = [];
 
         for (let columna = 0; columna < columnas; columna++) {
-
             tabla[fila][columna] = "";
         }
     }
 
-    // ------------------------------------------
-    // CALCULAR CUÁNTAS LETRAS HAY EN CADA FILA
-    // ------------------------------------------
+    // ==========================================
+    // SABER CUÁNTAS LETRAS TIENE CADA COLUMNA
+    // ==========================================
 
-    const letrasPorFila = [];
+    const caracteresCompletos = Math.floor(
+        mensaje.length / columnas
+    );
 
-    for (let fila = 0; fila < filas; fila++) {
+    const sobrantes = mensaje.length % columnas;
 
-        const inicio = fila * columnas;
-        const restantes = mensaje.length - inicio;
+    // ==========================================
+    // COLOCAR EL CIFRADO EN LA TABLA
+    // DE ARRIBA HACIA ABAJO
+    // ==========================================
 
-        letrasPorFila[fila] =
-            Math.min(columnas, Math.max(0, restantes));
-    }
-
-    // ------------------------------------------
-    // COLOCAR EL CIFRADO POR COLUMNAS
-    // ------------------------------------------
-
-    let indice = 0;
+    let posicion = 0;
 
     for (let columna = 0; columna < columnas; columna++) {
 
-        for (let fila = 0; fila < filas; fila++) {
+        // Las primeras columnas tienen una letra adicional
+        let cantidad = caracteresCompletos;
 
-            // Saber si esta posición existe
-            const posicion = fila * columnas + columna;
+        if (columna < sobrantes) {
+            cantidad++;
+        }
 
-            if (
-                posicion < mensaje.length &&
-                indice < mensaje.length
-            ) {
+        for (let fila = 0; fila < cantidad; fila++) {
 
-                tabla[fila][columna] = mensaje[indice];
+            tabla[fila][columna] = mensaje[posicion];
 
-                indice++;
-            }
+            posicion++;
         }
     }
 
-    // ------------------------------------------
+    // ==========================================
     // LEER LA TABLA POR FILAS
-    // ------------------------------------------
+    // ==========================================
 
-    let resultado = "";
+    let descifrado = "";
 
     for (let fila = 0; fila < filas; fila++) {
 
@@ -225,64 +221,72 @@ function descifrar() {
 
             if (tabla[fila][columna] !== "") {
 
-                resultado += tabla[fila][columna];
+                descifrado += tabla[fila][columna];
             }
         }
     }
 
-    // ------------------------------------------
-    // MOSTRAR TABLA
-    // ------------------------------------------
+    // ==========================================
+    // CREAR TABLA HTML
+    // ==========================================
 
-    let tablaHTML =
-        "<table border='1' cellpadding='8'>";
+    let tablaHTML = 
+        <table class="tabla-escitala">
+            <tbody>
+    ;
 
     for (let fila = 0; fila < filas; fila++) {
 
         tablaHTML += "<tr>";
 
-        for (
-            let columna = 0;
-            columna < columnas;
-            columna++
-        ) {
+        for (let columna = 0; columna < columnas; columna++) {
 
-            tablaHTML +=
-                "<td>" +
-                tabla[fila][columna] +
-                "</td>";
+            tablaHTML += 
+                <td>${tabla[fila][columna]}</td>
+            ;
         }
 
         tablaHTML += "</tr>";
     }
 
-    tablaHTML += "</table>";
+    tablaHTML += 
+            </tbody>
+        </table>
+    ;
 
-    // ------------------------------------------
+    // ==========================================
     // MOSTRAR RESULTADO
-    // ------------------------------------------
+    // ==========================================
 
-    document.getElementById("resultado").innerHTML =
-        "<b>Descifrado:</b> " +
-        resultado +
+    document.getElementById("resultado").innerHTML = 
 
-        "<br><br>" +
+        <div class="resultado-caja">
 
-        "<b>Clave:</b> " +
-        columnas +
-        " columnas" +
+            <h3>Resultado del descifrado</h3>
 
-        "<br><br>" +
+            <p>
+                <strong>Descifrado:</strong>
+                <span class="descifrado">${descifrado}</span>
+            </p>
 
-        "<b>Tabla reconstruida:</b><br><br>" +
-        tablaHTML +
+            <p>
+                <strong>Clave:</strong>
+                ${columnas} columnas
+            </p>
 
-        "<br>" +
+            <h4>Tabla reconstruida:</h4>
 
-        "<b>Proceso:</b><br>" +
+            ${tablaHTML}
 
-        "El mensaje cifrado se colocó por columnas " +
-        "y después se leyó por filas.";
+            <br>
+
+            <p>
+                El mensaje se colocó por columnas
+                y se leyó nuevamente por filas.
+            </p>
+
+        </div>
+    ;
 }
 
 
