@@ -4,15 +4,45 @@
   <meta charset="UTF-8">
   <title>Equipo 2 - Vigenère</title>
   <link rel="stylesheet" href="estilos.css">
+  <script src="vigenere.js"></script>
 </head>
 <body>
   <div class="contenedor">
     <div class="cuadro-texto">
       <h2>Equipo 2 - Método Vigenère</h2>
-      <p>El cifrado de Vigenère fue creado en 1553 por Giovan Battista Bellaso en Italia. En 1586, Blaise de Vigenère desarrolló una versión muy similar en Francia, que terminó popularizándose con su nombre.</p>
-      <p>Durante siglos se pensó que era imposible de romper, hasta que Charles Babbage y Friedrich Kasiski demostraron que podía descifrarse mediante análisis matemáticos y estadísticos.</p>
-      <p>El cifrado se realiza con la fórmula: <i>C = (P + K) mod 27</i></p>
-      <p>El descifrado se realiza con la fórmula: <i>P = (C - K) mod 27</i></p>
+      <p><strong>Antecedentes</strong></p>
+      <p>
+        El cifrado de Vigenère fue creado en 1553 por Giovan Battista Bellaso en Italia. 
+        En 1586, Blaise de Vigenère desarrolló una versión muy similar en Francia, que 
+        terminó popularizándose con su nombre.
+      </p>
+      <p>
+        Durante siglos se pensó que era imposible 
+        de romper, hasta que Charles Babbage y Friedrich Kasiski demostraron que podía 
+        descifrarse mediante análisis matemáticos y estadísticos.
+      </p>
+      <p><strong>¿Cómo funciona?</strong></p>
+      <p>
+        Cuando la matriz del cifrado Vigenère se volvió poco práctica para ciertos mensajes, se adoptó su representación matemática.
+        Esta consiste en asignar un número a cada letra del abecedario (latino u otro).
+        En el caso del abecedario latino, se usan 27 letras (de A a Z, incluyendo la Ñ), numeradas del 0 al 26.
+      </p>
+      <p>
+        El cifrado se realiza con la siguiente fórmula:
+      </p>
+      <p><i>
+        C = (P + K) mod 27
+      </i></p>
+      <p> 
+        Y el descifrado con esta fórmula:
+      </p>
+      <p><i>
+        P = (C - K) mod 27
+      </i></p>
+      <p><strong>Donde:</strong></p>
+      <p><strong> M:</strong> Es la posición de la letra del texto original.</p>
+      <p><strong> k:</strong>La posición de la letra de la clave.</p>
+      <p><strong> c:</strong> La posición de la letra cifrada.</p>
     </div>
 
     <div class="cuadro-tabla">
@@ -37,50 +67,8 @@
     <button onclick="cifrar()">Cifrar</button>
     <button onclick="descifrar()">Descifrar</button>
     <p id="resultado"></p>
+
+    <button onclick="location.href='index.html'">Regresar al menú principal</button>
   </div>
-
-  <script>
-    const alfabeto = "ABCDEFGHIJKLMNÑOPQRSTUVWXYZ";
-
-    function cifrar() {
-      let mensaje = document.getElementById("mensaje").value.toUpperCase();
-      let clave = document.getElementById("clave").value.toUpperCase();
-      let resultado = "";
-      let j = 0;
-      for (let i = 0; i < mensaje.length; i++) {
-        let letra = mensaje[i];
-        if (alfabeto.includes(letra)) {
-          let posMensaje = alfabeto.indexOf(letra);
-          let posClave = alfabeto.indexOf(clave[j % clave.length]);
-          let nuevaPos = (posMensaje + posClave) % alfabeto.length;
-          resultado += alfabeto[nuevaPos];
-          j++;
-        } else {
-          resultado += letra;
-        }
-      }
-      document.getElementById("resultado").innerText = "Texto cifrado: " + resultado;
-    }
-
-    function descifrar() {
-      let mensaje = document.getElementById("mensaje").value.toUpperCase();
-      let clave = document.getElementById("clave").value.toUpperCase();
-      let resultado = "";
-      let j = 0;
-      for (let i = 0; i < mensaje.length; i++) {
-        let letra = mensaje[i];
-        if (alfabeto.includes(letra)) {
-          let posMensaje = alfabeto.indexOf(letra);
-          let posClave = alfabeto.indexOf(clave[j % clave.length]);
-          let nuevaPos = (posMensaje - posClave + alfabeto.length) % alfabeto.length;
-          resultado += alfabeto[nuevaPos];
-          j++;
-        } else {
-          resultado += letra;
-        }
-      }
-      document.getElementById("resultado").innerText = "Texto descifrado: " + resultado;
-    }
-  </script>
 </body>
 </html>
