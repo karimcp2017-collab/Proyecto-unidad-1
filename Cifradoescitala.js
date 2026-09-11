@@ -45,9 +45,11 @@ function cifrar() {
     pasos += "<b>1. Matriz escrita por filas:</b><br><br>";
 
     for (let i = 0; i < filas; i++) {
+
         pasos += "Fila " + (i + 1) + ": ";
 
         for (let j = 0; j < ancho; j++) {
+
             let caracter = matriz[i][j];
 
             if (caracter === " ") {
@@ -68,6 +70,7 @@ function cifrar() {
     pasos += "<br><b>2. Lectura por columnas:</b><br><br>";
 
     for (let col = 0; col < ancho; col++) {
+
         pasos += "Columna " + (col + 1) + ": ";
 
         for (let fila = 0; fila < filas; fila++) {
@@ -90,19 +93,60 @@ function cifrar() {
         pasos += "<br>";
     }
 
+    // Mostrar el texto cifrado haciendo visibles los espacios
+    let resultadoVisible = resultado.replace(/ /g, "□");
+
     // Mostrar resultado
     resultadoDiv.innerHTML =
         "<h3> Proceso de Cifrado</h3>" +
-        "<b>Mensaje original:</b> " + mensajeInput.value +
-        "<br><b>Clave (columnas):</b> " + ancho +
-        "<br><b>Número de filas:</b> " + filas +
+
+        "<b>Mensaje original:</b> " +
+        mensajeInput.value +
+
+        "<br><b>Clave (columnas):</b> " +
+        ancho +
+
+        "<br><b>Número de filas:</b> " +
+        filas +
+
         "<br><br>" +
+
         pasos +
-        "<br><b> Texto cifrado:</b> " + resultado;
+
+        "<br><b>🔒 Texto cifrado:</b><br>" +
+
+        "<input type='text' id='textoCifrado' value='" +
+        resultado.replace(/"/g, "&quot;") +
+        "' readonly style='width: 90%;'>" +
+
+        "<br><br>" +
+
+        "<b>Texto cifrado visible:</b> " +
+        resultadoVisible +
+
+        "<br><br>" +
+
+        "<button onclick='copiarCifrado()'>📋 Copiar texto cifrado</button>" +
+
+        "<br><small>□ representa un espacio de relleno.</small>";
+}
+
+
+// Copiar el texto cifrado conservando los espacios
+function copiarCifrado() {
+
+    let texto = document.getElementById("textoCifrado");
+
+    texto.select();
+
+    navigator.clipboard.writeText(texto.value);
+
+    alert("Texto cifrado copiado correctamente.");
 }
 
 
 function descifrar() {
+
     let mensajeInput = document.getElementById("mensaje");
     let claveInput = document.getElementById("clave");
     let resultadoDiv = document.getElementById("resultado");
@@ -121,14 +165,17 @@ function descifrar() {
 
     if (isNaN(ancho) || ancho < 1) {
         resultadoDiv.innerHTML =
-            "<b> Ingresa una clave válida.</b>";
+            "<b>⚠️ Ingresa una clave válida.</b>";
         return;
     }
 
     // El mensaje cifrado debe ser divisible entre el ancho
     if (mensajeCifrado.length % ancho !== 0) {
         resultadoDiv.innerHTML =
-            "<b> El mensaje cifrado no es válido para esa clave.</b>";
+            "<b> El mensaje cifrado no es válido para esa clave.</b>" +
+            "<br><br>" +
+            "Recuerda que los espacios finales forman parte del mensaje cifrado." +
+            "<br>Usa el botón <b>Copiar texto cifrado</b> para conservarlos.";
         return;
     }
 
@@ -214,15 +261,28 @@ function descifrar() {
     // Mostrar resultado
     resultadoDiv.innerHTML =
         "<h3> Proceso de Descifrado</h3>" +
-        "<b>Texto cifrado:</b> " + mensajeCifrado +
-        "<br><b>Clave (columnas):</b> " + ancho +
-        "<br><b>Número de filas:</b> " + filas +
+
+        "<b>Texto cifrado:</b> " +
+        mensajeCifrado.replace(/ /g, "□") +
+
+        "<br><b>Clave (columnas):</b> " +
+        ancho +
+
+        "<br><b>Número de filas:</b> " +
+        filas +
+
         "<br><br>" +
+
         pasos +
-        "<br><b> Texto descifrado:</b> " + resultado;
+
+        "<br><b> Texto descifrado:</b> " +
+        resultado;
 }
 
 
-// Conectar los botones con las funciones
-document.getElementById("btnCifrar").addEventListener("click", cifrar);
-document.getElementById("btnDescifrar").addEventListener("click", descifrar);
+// Conectar los botones
+document.getElementById("btnCifrar")
+    .addEventListener("click", cifrar);
+
+document.getElementById("btnDescifrar")
+    .addEventListener("click", descifrar);
