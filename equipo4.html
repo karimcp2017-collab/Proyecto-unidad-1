@@ -1,21 +1,74 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
+
 <head>
-  <title>Equipo 4 - Escítala Espartana </title>
-   <script src="Cifradoescitala.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Equipo 4 - Escítala Espartana</title>
+
+  <!-- Archivo JavaScript -->
+  <script src="Cifradoescitala.js" defer></script>
+
+  <!-- Archivo CSS -->
   <link rel="stylesheet" href="estilos.css">
 </head>
+
 <body>
+
   <h2>Equipo 4 - Escítala Espartana</h2>
-  <p>Aquí el equipo 4 debe escribir su investigación sobre su método.</p>
-  <img src="https://nosolomates.es/web/imagenes/escitala.gif" alt="Escítala espartana" width = "500">>
+
+  <p>
+    Aquí el equipo 4 debe escribir su investigación sobre su método.
+  </p>
+
+  <img
+    src="https://nosolomates.es/web/imagenes/escitala.gif"
+    alt="Escítala espartana"
+    width="500"
+  >
+
   <h3>Prueba del programa</h3>
-  <input type="text" id="mensaje" placeholder="Escribe tu mensaje">
-  <input type="text" id="clave" placeholder="Escribe tu clave">
- <button onclick="cifrar()">Cifrar</button>
+
+  <label for="mensaje">Mensaje:</label>
+  <br>
+
+  <input
+    type="text"
+    id="mensaje"
+    placeholder="Escribe tu mensaje"
+  >
+
+  <br><br>
+
+  <label for="clave">Clave:</label>
+  <br>
+
+  <input
+    type="number"
+    id="clave"
+    min="1"
+    step="1"
+    placeholder="Ejemplo: 3"
+  >
+
+  <br><br>
+
+  <button onclick="cifrar()">Cifrar</button>
+
   <button onclick="descifrar()">Descifrar</button>
+
+  <br><br>
+
   <p id="resultado"></p>
 
-  <button onclick="location.href='index.html'">Regresar al menú principal</button>
+  <br>
+
+  <button onclick="location.href='index.html'">
+    Regresar al menú principal
+  </button>
+
 </body>
+
 </html>
+
