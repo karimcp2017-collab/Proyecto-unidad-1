@@ -1,31 +1,25 @@
-/* Paleta de colores pasteles fríos */
 :root {
-  --color-fondo: #e6f0f8;   /* azul muy claro */
-  --color-principal: #a3c4dc; /* azul pastel */
-  --color-secundario: #c8d9e6; /* gris azulado */
-  --color-acento: #b8e0d2;   /* verde menta pastel */
-  --color-texto: #2f3e46;    /* gris oscuro para contraste */
+  --color-fondo: #e6f0f8;
+  --color-principal: #a3c4dc;
+  --color-secundario: #c8d9e6;
+  --color-acento: #b8e0d2;
+  --color-texto: #2f3e46;
 }
 
-/* Estilo general */
 body {
   font-family: 'Segoe UI', sans-serif;
   background: var(--color-fondo);
   color: var(--color-texto);
   margin: 0;
   padding: 0;
-  text-align: center; /* centra todo el contenido por defecto */
-  transition: background 0.5s ease;
+  text-align: center;
 }
 
-/* Encabezados */
 h1, h2, h3 {
   color: var(--color-principal);
   margin: 20px 0;
-  animation: fadeInDown 1s ease;
 }
 
-/* Botones */
 button {
   background: var(--color-acento);
   border: none;
@@ -34,39 +28,41 @@ button {
   color: var(--color-texto);
   font-weight: bold;
   cursor: pointer;
-  margin: 15px auto; /* centrado con margen */
-  display: block; /* asegura que se centre */
-  transition: transform 0.3s ease, background 0.3s ease;
+  margin: 15px auto;
+  display: block;
 }
 
 button:hover {
   background: var(--color-principal);
-  transform: scale(1.05);
 }
 
-/* Tarjetas */
-.card {
-  background: var(--color-secundario);
-  border-radius: 12px;
+.contenedor {
+  max-width: 900px;
+  margin: 50px auto;
   padding: 20px;
-  margin: 20px auto;
-  max-width: 400px; /* tamaño controlado y centrado */
-  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-  transition: transform 0.4s ease;
 }
 
-.card:hover {
-  transform: translateY(-5px);
+.cuadro-texto, .cuadro-tabla {
+  background: #ffffff;
+  border: 2px solid var(--color-principal);
+  border-radius: 10px;
+  padding: 20px;
+  margin-bottom: 30px;
 }
 
-/* Animaciones */
-@keyframes fadeInDown {
-  from {
-    opacity: 0;
-    transform: translateY(-20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+.tabla-alfabeto {
+  margin: 0 auto;
+  border-collapse: collapse;
+  width: 95%;
+}
+
+.tabla-alfabeto th, .tabla-alfabeto td {
+  border: 1px solid var(--color-principal);
+  padding: 8px;
+  text-align: center;
+}
+
+.tabla-alfabeto th {
+  background: var(--color-acento);
+  color: var(--color-texto);
 }
