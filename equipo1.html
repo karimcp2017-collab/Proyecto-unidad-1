@@ -8,15 +8,57 @@
 <body>
     <h2>Equipo 1 - Cuadrado de Polibio</h2>
     
-    <p><strong>Antecedentes y Funcionamiento</strong></p>
-    <p>
-      El cuadrado de Polibio es un método de cifrado por sustitución ideado por el historiador griego Polibio. 
-      Consiste en acomodar el alfabeto en una matriz de 5x5 (donde las letras I y J comparten la misma casilla).
-      Cada letra del mensaje se sustituye por un par de números: el primero representa la fila y el segundo la columna.
-    </p>
+    <div style="text-align: left; max-width: 800px; margin: 0 auto;">
+      <h3>Antecedentes Históricos</h3>
+      <p>
+        Fue inventado por el historiador y militar griego <strong>Polibio</strong> en el siglo II a.C. 
+        Originalmente fue concebido como un sistema de telegrafía óptica para transmitir mensajes a distancia 
+        utilizando antorchas encendidas desde torres adyacentes.
+      </p>
+
+      <h3>Principio de Funcionamiento</h3>
+      <p>
+        Consiste en acomodar el alfabeto en una matriz bidimensional (generalmente de 5x5 celdas). 
+        Cada letra del texto se transforma en un par de coordenadas numéricas compuestas por el número de su fila y el número de su columna.
+      </p>
+
+      <h3>Tipo de Cifrado</h3>
+      <p>
+        Es un cifrado de <strong>sustitución simple monofónica</strong> que actúa como un sistema de <strong>fraccionamiento</strong>, 
+        ya que convierte cada símbolo individual (letra) en múltiples elementos (dos dígitos).
+      </p>
+
+      <h3>Uso de Claves o Parámetros</h3>
+      <p>
+        El parámetro principal es el orden del alfabeto dentro de la matriz 5x5. Se utiliza una matriz fija convencional o una palabra clave 
+        sin letras repetidas para reordenar las casillas iniciales, compartiendo la posición de las letras <strong>I</strong> y <strong>J</strong> 
+        para ajustar las 26 letras del alfabeto en 25 espacios.
+      </p>
+
+      <h3>Proceso de Cifrado</h3>
+      <ul>
+        <li>Se convierte el texto a mayúsculas y se reemplaza la letra <strong>J</strong> por la <strong>I</strong> (o se eliminan tildes/espacios).</li>
+        <li>Para cada letra del mensaje, se ubica su casilla dentro de la matriz.</li>
+        <li>Se toma el número de la <strong>fila</strong> seguido del número de la <strong>columna</strong> para formar el par cifrado.</li>
+      </ul>
+
+      <h3>Proceso de Descifrado</h3>
+      <ul>
+        <li>Se toman los dígitos cifrados agrupados en pares.</li>
+        <li>El primer dígito ubica la <strong>fila</strong> y el segundo la <strong>columna</strong> dentro del cuadrado.</li>
+        <li>Se extrae la letra correspondiente a esa casilla para reconstruir el mensaje original.</li>
+      </ul>
+
+      <h3>Vulnerabilidades y Limitaciones</h3>
+      <ul>
+        <li><strong>Análisis de frecuencias:</strong> Al ser un cifrado de sustitución simple, conserva la frecuencia estadística de las letras, haciéndolo muy fácil de romper.</li>
+        <li><strong>Pérdida de distinción:</strong> La ambigüedad al compartir la casilla entre <strong>I</strong> y <strong>J</strong> requiere inferir la letra correcta según el contexto de la palabra.</li>
+        <li><strong>Duplicación de tamaño:</strong> La longitud del mensaje cifrado resulta exactamente el doble que la del texto original.</li>
+      </ul>
+    </div>
 
     <h3>Matriz de Referencia (5x5)</h3>
-    <table border="1" style="margin: 10px 0; text-align: center;">
+    <table border="1" style="margin: 10px auto; text-align: center;">
       <tr><th></th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th></tr>
       <tr><th>1</th><td>A</td><td>B</td><td>C</td><td>D</td><td>E</td></tr>
       <tr><th>2</th><td>F</td><td>G</td><td>H</td><td>I/J</td><td>K</td></tr>
@@ -27,19 +69,16 @@
 
     <h3>Prueba del programa</h3>
     <input type="text" id="texto" placeholder="Escribe tu mensaje">
+    <br><br>
     <button onclick="cifrar()">Cifrar</button>
     <button onclick="descifrar()">Descifrar</button>
 
-    <p id="resultado">Resultado: </p>
+    <h4 id="resultado">Resultado: </h4>
 
+    <br>
     <button onclick="location.href='index.html'">Regresar al menú principal</button>
 
     <script src="polibio.js"></script>
 </body>
 </html>
-
-  <button onclick="location.href='index.html'">Regresar al menú principal</button>
-</body>
-</html>
-
 
