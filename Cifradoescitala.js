@@ -113,7 +113,7 @@ function cifrar() {
 
         pasos +
 
-        "<br><b>🔒 Texto cifrado:</b><br>" +
+        "<br><b> Texto cifrado:</b><br>" +
 
         "<input type='text' id='textoCifrado' value='" +
         resultado.replace(/"/g, "&quot;") +
@@ -126,7 +126,7 @@ function cifrar() {
 
         "<br><br>" +
 
-        "<button onclick='copiarCifrado()'>📋 Copiar texto cifrado</button>" +
+        "<button onclick='copiarCifrado()'> Copiar texto cifrado</button>" +
 
         "<br><small>□ representa un espacio de relleno.</small>";
 }
@@ -165,7 +165,7 @@ function descifrar() {
 
     if (isNaN(ancho) || ancho < 1) {
         resultadoDiv.innerHTML =
-            "<b>⚠️ Ingresa una clave válida.</b>";
+            "<b> Ingresa una clave válida.</b>";
         return;
     }
 
