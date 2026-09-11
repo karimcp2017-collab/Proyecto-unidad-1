@@ -3,128 +3,16 @@
 <head>
   <meta charset="UTF-8">
   <title>Equipo 2 - Vigenère</title>
-  <style>
-    body {
-      background-color: #e6f2fa;
-      margin: 0;
-      padding: 0;
-      text-align: center;
-      font-family: Arial, sans-serif;
-    }
-    .contenedor {
-      max-width: 900px;
-      margin: 50px auto;
-      padding: 20px;
-    }
-    .cuadro-texto, .cuadro-tabla {
-      background-color: #ffffff;
-      border: 2px solid #8ac6d1;
-      border-radius: 10px;
-      padding: 20px;
-      margin-bottom: 30px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
-    }
-    h2, h3 {
-      color: #5fa8d3;
-    }
-    p {
-      color: #333;
-      line-height: 1.6;
-    }
-    button {
-      background-color: #a8e6cf;
-      color: #004d40;
-      border: none;
-      padding: 10px 20px;
-      margin: 10px;
-      border-radius: 8px;
-      cursor: pointer;
-      font-weight: bold;
-    }
-    button:hover {
-      background-color: #81c784;
-    }
-    input {
-      margin: 5px;
-      padding: 8px;
-      border-radius: 4px;
-      border: 1px solid #8ac6d1;
-    }
-    .tabla-alfabeto {
-      margin: 0 auto;
-      border-collapse: collapse;
-      width: 95%;
-    }
-    .tabla-alfabeto th, .tabla-alfabeto td {
-      border: 1px solid #5fa8d3;
-      padding: 8px;
-      text-align: center;
-    }
-    .tabla-alfabeto th {
-      background-color: #a8e6cf;
-      color: #004d40;
-    }
-    #resultado {
-      background-color: #ffffff;
-      border: 2px solid #8ac6d1;
-      border-radius: 10px;
-      padding: 15px;
-      margin-top: 20px;
-      text-align: left;
-      white-space: pre-line;
-    }
-  </style>
+  <link rel="stylesheet" href="estilos.css">
 </head>
 <body>
   <div class="contenedor">
     <div class="cuadro-texto">
       <h2>Equipo 2 - Método Vigenère</h2>
-      <p><strong>Antecedentes</strong></p>
-      <p>
-        El cifrado de Vigenère fue creado en 1553 por Giovan Battista Bellaso en Italia. 
-        En 1586, Blaise de Vigenère desarrolló una versión muy similar en Francia, que 
-        terminó popularizándose con su nombre.
-      </p>
-      <p>
-         Durante siglos se pensó que era imposible 
-        de romper, hasta que Charles Babbage y Friedrich Kasiski demostraron que podía 
-        descifrarse mediante análisis matemáticos y estadísticos.
-      </p>
-            <p><strong>¿Como funciona?</strong></p>
-      <p>
-                Cuando la matriz del cifrado Vigenère se volvió poco práctica para ciertos mensajes, se adoptó su representación matemática.
-Esta consiste en asignar un número a cada letra del abecedario (latino u otro).
-En el caso del abecedario latino, se usan 27 letras (de A a Z, incluyendo la Ñ), numeradas del 0 al 26.
-        </p>
-        <p>
-  El cifrado se realiza con la siguiente fórmula:
-        </p>
-        <p><i>
-C1 = (M1 + K1) mod 27
-        </i>
-        </p>
-       <p> 
-Y el descifrado con esta formula:
-      </p>
-      <p>
-        <i>
-M1 = (C1 - K1) mod 27
-        </i>
-      </p>
-      <p><strong>
-Donde:
-      </strong>
-      </p>
-      <p>
-        M1: Es la posición de la letra del texto original.
-      </p>
-      <p>
-        K1: La posición de letra de la clave.
-      </p>
-      <p>
-        C1: L aposición de la letra cifrada.
-    </p> 
-    </p>
+      <p>El cifrado de Vigenère fue creado en 1553 por Giovan Battista Bellaso en Italia. En 1586, Blaise de Vigenère desarrolló una versión muy similar en Francia, que terminó popularizándose con su nombre.</p>
+      <p>Durante siglos se pensó que era imposible de romper, hasta que Charles Babbage y Friedrich Kasiski demostraron que podía descifrarse mediante análisis matemáticos y estadísticos.</p>
+      <p>El cifrado se realiza con la fórmula: <i>C = (P + K) mod 27</i></p>
+      <p>El descifrado se realiza con la fórmula: <i>P = (C - K) mod 27</i></p>
     </div>
 
     <div class="cuadro-tabla">
@@ -148,9 +36,7 @@ Donde:
     <input type="text" id="clave" placeholder="Escribe tu clave">
     <button onclick="cifrar()">Cifrar</button>
     <button onclick="descifrar()">Descifrar</button>
-    <div id="resultado"></div>
-
-    <button onclick="location.href='index.html'">Regresar al menú principal</button>
+    <p id="resultado"></p>
   </div>
 
   <script>
@@ -159,51 +45,41 @@ Donde:
     function cifrar() {
       let mensaje = document.getElementById("mensaje").value.toUpperCase();
       let clave = document.getElementById("clave").value.toUpperCase();
-      let resultado = "🔒 Procedimiento de cifrado:\n\n";
-      let textoFinal = "";
+      let resultado = "";
       let j = 0;
-
       for (let i = 0; i < mensaje.length; i++) {
         let letra = mensaje[i];
         if (alfabeto.includes(letra)) {
           let posMensaje = alfabeto.indexOf(letra);
           let posClave = alfabeto.indexOf(clave[j % clave.length]);
           let nuevaPos = (posMensaje + posClave) % alfabeto.length;
-          let letraCifrada = alfabeto[nuevaPos];
-          resultado += `Letra: ${letra} (${posMensaje}) + Clave: ${clave[j % clave.length]} (${posClave}) = ${letraCifrada} (${nuevaPos})\n`;
-          textoFinal += letraCifrada;
+          resultado += alfabeto[nuevaPos];
           j++;
         } else {
-          textoFinal += letra;
+          resultado += letra;
         }
       }
-      resultado += `\n🔹 Texto cifrado final: ${textoFinal}`;
-      document.getElementById("resultado").innerText = resultado;
+      document.getElementById("resultado").innerText = "Texto cifrado: " + resultado;
     }
 
     function descifrar() {
       let mensaje = document.getElementById("mensaje").value.toUpperCase();
       let clave = document.getElementById("clave").value.toUpperCase();
-      let resultado = "🔓 Procedimiento de descifrado:\n\n";
-      let textoFinal = "";
+      let resultado = "";
       let j = 0;
-
       for (let i = 0; i < mensaje.length; i++) {
         let letra = mensaje[i];
         if (alfabeto.includes(letra)) {
           let posMensaje = alfabeto.indexOf(letra);
           let posClave = alfabeto.indexOf(clave[j % clave.length]);
           let nuevaPos = (posMensaje - posClave + alfabeto.length) % alfabeto.length;
-          let letraDescifrada = alfabeto[nuevaPos];
-          resultado += `Letra: ${letra} (${posMensaje}) - Clave: ${clave[j % clave.length]} (${posClave}) = ${letraDescifrada} (${nuevaPos})\n`;
-          textoFinal += letraDescifrada;
+          resultado += alfabeto[nuevaPos];
           j++;
         } else {
-          textoFinal += letra;
+          resultado += letra;
         }
       }
-      resultado += `\n🔹 Texto descifrado final: ${textoFinal}`;
-      document.getElementById("resultado").innerText = resultado;
+      document.getElementById("resultado").innerText = "Texto descifrado: " + resultado;
     }
   </script>
 </body>
