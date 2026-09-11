@@ -1,82 +1,36 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>Equipo 4 - Escítala Espartana</title>
-
-    <link rel="stylesheet" href="estilos.css">
-
-    <!-- defer hace que el JS espere a que cargue el HTML -->
-    <script src="Cifradoescitala.js" defer></script>
 </head>
-
 <body>
 
-    <h2>Equipo 4 - Escítala Espartana</h2>
+    <h2>Escítala Espartana</h2>
 
-    <p>
-        La Escítala Espartana es un método de cifrado en el que
-        el mensaje se escribe en filas y posteriormente se lee
-        por columnas.
-    </p>
-
-    <img
-        src="https://nosolomates.es/web/imagenes/escitala.gif"
-        alt="Escítala espartana"
-        width="500"
-    >
-
-    <h3>Prueba del programa</h3>
-
+    <!-- Entrada de mensaje -->
     <label for="mensaje">Mensaje:</label>
-    <br>
-
-    <input
-        type="text"
-        id="mensaje"
-        placeholder="Escribe tu mensaje"
-    >
+    <input type="text" id="mensaje" placeholder="Escribe tu mensaje aquí">
 
     <br><br>
 
-    <label for="clave">Clave (número de columnas):</label>
-    <br>
-
-    <input
-        type="number"
-        id="clave"
-        min="1"
-        step="1"
-        placeholder="Ejemplo: 4"
-    >
+    <!-- Entrada de la clave -->
+    <label for="clave">Clave (columnas):</label>
+    <input type="number" id="clave" min="1" placeholder="Ej. 4">
 
     <br><br>
 
-    <button type="button" id="btnCifrar">
-        Cifrar
-    </button>
+    <!-- Botones con los IDs requeridos -->
+    <button id="btnCifrar">Cifrar</button>
+    <button id="btnDescifrar">Descifrar</button>
 
-    <button type="button" id="btnDescifrar">
-        Descifrar
-    </button>
+    <hr>
 
-    <br><br>
-
+    <!-- Contenedor donde se dibuja la tabla y el resultado -->
     <div id="resultado"></div>
 
-    <br>
-
-    <button
-        type="button"
-        onclick="location.href='index.html'"
-    >
-        Regresar al menú principal
-    </button>
-
+    <!-- Enlace al archivo JS -->
+    <script src="script.js"></script>
 </body>
-
 </html>
 
