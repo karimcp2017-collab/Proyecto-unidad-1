@@ -3,22 +3,21 @@ function cifrar() {
     let claveInput = document.getElementById("clave");
     let resultadoDiv = document.getElementById("resultado");
 
-    if (!mensajeInput || !claveInput || !resultadoDiv) return;
-
     let mensaje = mensajeInput.value;
     let ancho = parseInt(claveInput.value, 10);
     let resultado = "";
     let pasos = "";
 
-    if (isNaN(ancho) || ancho < 1) {
+    // Validar datos
+    if (mensaje.length === 0) {
         resultadoDiv.innerHTML =
-            "<b>Error:</b> La clave debe ser un número entero mayor o igual a 1.";
+            "<b>⚠️ Ingresa un mensaje para cifrar.</b>";
         return;
     }
 
-    if (mensaje.length === 0) {
+    if (isNaN(ancho) || ancho < 1) {
         resultadoDiv.innerHTML =
-            "<b>Error:</b> Ingresa un mensaje para cifrar.";
+            "<b>⚠️ Ingresa una clave válida.</b>";
         return;
     }
 
@@ -43,7 +42,7 @@ function cifrar() {
     }
 
     // Mostrar matriz
-    pasos += "<b>1. Matriz escrita por filas:</b><br>";
+    pasos += "<b>1. Matriz escrita por filas:</b><br><br>";
 
     for (let i = 0; i < filas; i++) {
         pasos += "Fila " + (i + 1) + ": ";
@@ -66,12 +65,13 @@ function cifrar() {
     }
 
     // Leer la matriz por columnas
-    pasos += "<br><b>2. Lectura por columnas:</b><br>";
+    pasos += "<br><b>2. Lectura por columnas:</b><br><br>";
 
     for (let col = 0; col < ancho; col++) {
         pasos += "Columna " + (col + 1) + ": ";
 
         for (let fila = 0; fila < filas; fila++) {
+
             resultado += matriz[fila][col];
 
             let caracter = matriz[fila][col];
@@ -94,8 +94,8 @@ function cifrar() {
     resultadoDiv.innerHTML =
         "<h3>🔐 Proceso de Cifrado</h3>" +
         "<b>Mensaje original:</b> " + mensajeInput.value +
-        "<br><b>Ancho:</b> " + ancho +
-        "<br><b>Filas:</b> " + filas +
+        "<br><b>Clave (columnas):</b> " + ancho +
+        "<br><b>Número de filas:</b> " + filas +
         "<br><br>" +
         pasos +
         "<br><b>🔒 Texto cifrado:</b> " + resultado;
@@ -107,28 +107,28 @@ function descifrar() {
     let claveInput = document.getElementById("clave");
     let resultadoDiv = document.getElementById("resultado");
 
-    if (!mensajeInput || !claveInput || !resultadoDiv) return;
-
     let mensajeCifrado = mensajeInput.value;
     let ancho = parseInt(claveInput.value, 10);
     let resultado = "";
     let pasos = "";
 
-    if (isNaN(ancho) || ancho < 1) {
-        resultadoDiv.innerHTML =
-            "<b>Error:</b> La clave debe ser un número entero mayor o igual a 1.";
-        return;
-    }
-
+    // Validar datos
     if (mensajeCifrado.length === 0) {
         resultadoDiv.innerHTML =
-            "<b>Error:</b> Ingresa un mensaje para descifrar.";
+            "<b>⚠️ Ingresa un mensaje para descifrar.</b>";
         return;
     }
 
+    if (isNaN(ancho) || ancho < 1) {
+        resultadoDiv.innerHTML =
+            "<b>⚠️ Ingresa una clave válida.</b>";
+        return;
+    }
+
+    // El mensaje cifrado debe ser divisible entre el ancho
     if (mensajeCifrado.length % ancho !== 0) {
         resultadoDiv.innerHTML =
-            "<b>Error:</b> El mensaje cifrado no es válido para esa clave.";
+            "<b>⚠️ El mensaje cifrado no es válido para esa clave.</b>";
         return;
     }
 
@@ -148,18 +148,23 @@ function descifrar() {
     for (let col = 0; col < ancho; col++) {
 
         for (let fila = 0; fila < filas; fila++) {
-            matriz[fila][col] = mensajeCifrado.charAt(index);
+
+            matriz[fila][col] =
+                mensajeCifrado.charAt(index);
+
             index++;
         }
     }
 
-    // Mostrar matriz reconstruida
-    pasos += "<b>1. Matriz reconstruida por columnas:</b><br>";
+    // Mostrar matriz
+    pasos += "<b>1. Matriz reconstruida por columnas:</b><br><br>";
 
     for (let i = 0; i < filas; i++) {
+
         pasos += "Fila " + (i + 1) + ": ";
 
         for (let j = 0; j < ancho; j++) {
+
             let caracter = matriz[i][j];
 
             if (caracter === " ") {
@@ -177,13 +182,14 @@ function descifrar() {
     }
 
     // Leer la matriz por filas
-    pasos += "<br><b>2. Lectura por filas:</b><br>";
+    pasos += "<br><b>2. Lectura por filas:</b><br><br>";
 
     for (let fila = 0; fila < filas; fila++) {
 
         pasos += "Fila " + (fila + 1) + ": ";
 
         for (let col = 0; col < ancho; col++) {
+
             resultado += matriz[fila][col];
 
             let caracter = matriz[fila][col];
@@ -209,9 +215,14 @@ function descifrar() {
     resultadoDiv.innerHTML =
         "<h3>🔓 Proceso de Descifrado</h3>" +
         "<b>Texto cifrado:</b> " + mensajeCifrado +
-        "<br><b>Ancho:</b> " + ancho +
-        "<br><b>Filas:</b> " + filas +
+        "<br><b>Clave (columnas):</b> " + ancho +
+        "<br><b>Número de filas:</b> " + filas +
         "<br><br>" +
         pasos +
         "<br><b>🔓 Texto descifrado:</b> " + resultado;
 }
+
+
+// Conectar los botones con las funciones
+document.getElementById("btnCifrar").addEventListener("click", cifrar);
+document.getElementById("btnDescifrar").addEventListener("click", descifrar);
