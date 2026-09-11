@@ -11,13 +11,13 @@ function cifrar() {
     // Validar datos
     if (mensaje.length === 0) {
         resultadoDiv.innerHTML =
-            "<b>⚠️ Ingresa un mensaje para cifrar.</b>";
+            "<b> Ingresa un mensaje para cifrar.</b>";
         return;
     }
 
     if (isNaN(ancho) || ancho < 1) {
         resultadoDiv.innerHTML =
-            "<b>⚠️ Ingresa una clave válida.</b>";
+            "<b> Ingresa una clave válida.</b>";
         return;
     }
 
@@ -92,13 +92,13 @@ function cifrar() {
 
     // Mostrar resultado
     resultadoDiv.innerHTML =
-        "<h3>🔐 Proceso de Cifrado</h3>" +
+        "<h3> Proceso de Cifrado</h3>" +
         "<b>Mensaje original:</b> " + mensajeInput.value +
         "<br><b>Clave (columnas):</b> " + ancho +
         "<br><b>Número de filas:</b> " + filas +
         "<br><br>" +
         pasos +
-        "<br><b>🔒 Texto cifrado:</b> " + resultado;
+        "<br><b> Texto cifrado:</b> " + resultado;
 }
 
 
@@ -115,20 +115,20 @@ function descifrar() {
     // Validar datos
     if (mensajeCifrado.length === 0) {
         resultadoDiv.innerHTML =
-            "<b>⚠️ Ingresa un mensaje para descifrar.</b>";
+            "<b> Ingresa un mensaje para descifrar.</b>";
         return;
     }
 
     if (isNaN(ancho) || ancho < 1) {
         resultadoDiv.innerHTML =
-            "<b>⚠️ Ingresa una clave válida.</b>";
+            "<b> Ingresa una clave válida.</b>";
         return;
     }
 
     // El mensaje cifrado debe ser divisible entre el ancho
     if (mensajeCifrado.length % ancho !== 0) {
         resultadoDiv.innerHTML =
-            "<b>⚠️ El mensaje cifrado no es válido para esa clave.</b>";
+            "<b> El mensaje cifrado no es válido para esa clave.</b>";
         return;
     }
 
@@ -213,13 +213,13 @@ function descifrar() {
 
     // Mostrar resultado
     resultadoDiv.innerHTML =
-        "<h3>🔓 Proceso de Descifrado</h3>" +
+        "<h3> Proceso de Descifrado</h3>" +
         "<b>Texto cifrado:</b> " + mensajeCifrado +
         "<br><b>Clave (columnas):</b> " + ancho +
         "<br><b>Número de filas:</b> " + filas +
         "<br><br>" +
         pasos +
-        "<br><b>🔓 Texto descifrado:</b> " + resultado;
+        "<br><b> Texto descifrado:</b> " + resultado;
 }
 
 
