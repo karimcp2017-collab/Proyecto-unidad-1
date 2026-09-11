@@ -57,7 +57,69 @@
     <button onclick="location.href='index.html'">Regresar al menú principal</button>
   </div>
 
-  <!-- Script externo cargado al final -->
-  <script src="vigenere.js"></script>
+  <!-- Script embebido -->
+  <script>
+    const alfabeto = "ABCDEFGHIJKLMNÑOPQRSTUVWXYZ";
+
+    function cifrar() {
+      const mensaje = document.getElementById("mensaje").value.toUpperCase();
+      const clave = document.getElementById("clave").value.toUpperCase();
+      const resultado = document.getElementById("resultado");
+
+      if (!clave) {
+        resultado.innerText = "⚠️ Ingresa una clave válida.";
+        return;
+      }
+
+      let textoFinal = "";
+      let j = 0;
+
+      for (let i = 0; i < mensaje.length; i++) {
+        const letra = mensaje[i];
+        if (alfabeto.includes(letra)) {
+          const posMensaje = alfabeto.indexOf(letra);
+          const posClave = alfabeto.indexOf(clave[j % clave.length]);
+          const nuevaPos = (posMensaje + posClave) % alfabeto.length;
+          textoFinal += alfabeto[nuevaPos];
+          j++;
+        } else {
+          textoFinal += letra;
+        }
+      }
+      resultado.innerText = "🔒 Texto cifrado: " + textoFinal;
+    }
+
+    function descifrar() {
+      const mensaje = document.getElementById("mensaje").value.toUpperCase();
+      const clave = document.getElementById("clave").value.toUpperCase();
+      const resultado = document.getElementById("resultado");
+
+      if (!clave) {
+        resultado.innerText = "⚠️ Ingresa una clave válida.";
+        return;
+      }
+
+      let textoFinal = "";
+      let j = 0;
+
+      for (let i = 0; i < mensaje.length; i++) {
+        const letra = mensaje[i];
+        if (alfabeto.includes(letra)) {
+          const posMensaje = alfabeto.indexOf(letra);
+          const posClave = alfabeto.indexOf(clave[j % clave.length]);
+          const nuevaPos = (posMensaje - posClave + alfabeto.length) % alfabeto.length;
+          textoFinal += alfabeto[nuevaPos];
+          j++;
+        } else {
+          textoFinal += letra;
+        }
+      }
+      resultado.innerText = "🔓 Texto descifrado: " + textoFinal;
+    }
+
+    // Asignar eventos a los botones
+    document.getElementById("btnCifrar").addEventListener("click", cifrar);
+    document.getElementById("btnDescifrar").addEventListener("click", descifrar);
+  </script>
 </body>
 </html>
