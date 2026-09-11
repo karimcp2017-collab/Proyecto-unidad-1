@@ -1,19 +1,42 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
-  <title>Equipo 1</title>
-  <link rel="stylesheet" href="estilos.css">
+    <meta charset="UTF-8">
+    <title>Equipo 1 - Cifrado Polibio</title>
+    <link rel="stylesheet" href="estilos.css">
 </head>
 <body>
-  <h2>Equipo 1 - Método asignado</h2>
-  <p>Aquí el equipo 1 debe escribir su investigación sobre su método.</p>
+    <h2>Equipo 1 - Cuadrado de Polibio</h2>
+    
+    <p><strong>Antecedentes y Funcionamiento</strong></p>
+    <p>
+      El cuadrado de Polibio es un método de cifrado por sustitución ideado por el historiador griego Polibio. 
+      Consiste en acomodar el alfabeto en una matriz de 5x5 (donde las letras I y J comparten la misma casilla).
+      Cada letra del mensaje se sustituye por un par de números: el primero representa la fila y el segundo la columna.
+    </p>
 
-  <h3>Prueba del programa</h3>
-  <input type="text" placeholder="Escribe tu mensaje">
-  <input type="text" placeholder="Escribe tu clave">
-  <button>Cifrar</button>
-  <button>Descifrar</button>
-  <p id="resultado"></p>
+    <h3>Matriz de Referencia (5x5)</h3>
+    <table border="1" style="margin: 10px 0; text-align: center;">
+      <tr><th></th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th></tr>
+      <tr><th>1</th><td>A</td><td>B</td><td>C</td><td>D</td><td>E</td></tr>
+      <tr><th>2</th><td>F</td><td>G</td><td>H</td><td>I/J</td><td>K</td></tr>
+      <tr><th>3</th><td>L</td><td>M</td><td>N</td><td>O</td><td>P</td></tr>
+      <tr><th>4</th><td>Q</td><td>R</td><td>S</td><td>T</td><td>U</td></tr>
+      <tr><th>5</th><td>V</td><td>W</td><td>X</td><td>Y</td><td>Z</td></tr>
+    </table>
+
+    <h3>Prueba del programa</h3>
+    <input type="text" id="texto" placeholder="Escribe tu mensaje">
+    <button onclick="cifrar()">Cifrar</button>
+    <button onclick="descifrar()">Descifrar</button>
+
+    <p id="resultado">Resultado: </p>
+
+    <button onclick="location.href='index.html'">Regresar al menú principal</button>
+
+    <script src="polibio.js"></script>
+</body>
+</html>
 
   <button onclick="location.href='index.html'">Regresar al menú principal</button>
 </body>
