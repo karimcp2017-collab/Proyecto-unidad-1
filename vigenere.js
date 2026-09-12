@@ -12,7 +12,7 @@ document.addEventListener("DOMContentLoaded", () => {
     let clave = claveInput.value.toUpperCase();
 
     if (clave.length === 0) {
-      resultado.innerText = "⚠️ Ingresa una clave válida.";
+      resultado.innerText = " Ingresa una clave válida.";
       return;
     }
 
@@ -25,7 +25,7 @@ document.addEventListener("DOMContentLoaded", () => {
         let posMensaje = alfabeto.indexOf(letra);
         let posClave = alfabeto.indexOf(clave[j % clave.length]);
         if (posClave === -1) {
-          resultado.innerText = "⚠️ La clave contiene caracteres inválidos.";
+          resultado.innerText = "La clave contiene caracteres inválidos.";
           return;
         }
         let nuevaPos = (posMensaje + posClave) % alfabeto.length;
@@ -35,7 +35,7 @@ document.addEventListener("DOMContentLoaded", () => {
         textoFinal += letra;
       }
     }
-    resultado.innerText = "🔒 Texto cifrado: " + textoFinal;
+    resultado.innerText = " Texto cifrado: " + textoFinal;
   }
 
   function descifrar() {
@@ -43,7 +43,7 @@ document.addEventListener("DOMContentLoaded", () => {
     let clave = claveInput.value.toUpperCase();
 
     if (clave.length === 0) {
-      resultado.innerText = "⚠️ Ingresa una clave válida.";
+      resultado.innerText = "Ingresa una clave válida.";
       return;
     }
 
@@ -56,7 +56,7 @@ document.addEventListener("DOMContentLoaded", () => {
         let posMensaje = alfabeto.indexOf(letra);
         let posClave = alfabeto.indexOf(clave[j % clave.length]);
         if (posClave === -1) {
-          resultado.innerText = "⚠️ La clave contiene caracteres inválidos.";
+          resultado.innerText = "La clave contiene caracteres inválidos.";
           return;
         }
         let nuevaPos = (posMensaje - posClave + alfabeto.length) % alfabeto.length;
@@ -66,10 +66,10 @@ document.addEventListener("DOMContentLoaded", () => {
         textoFinal += letra;
       }
     }
-    resultado.innerText = "🔓 Texto descifrado: " + textoFinal;
+    resultado.innerText = "Texto descifrado: " + textoFinal;
   }
 
-  // Asignar eventos a los botones
   btnCifrar.addEventListener("click", cifrar);
   btnDescifrar.addEventListener("click", descifrar);
 });
+ 
