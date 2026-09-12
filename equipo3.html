@@ -15,9 +15,9 @@ Aunque hoy en día la técnica resulta elemental, en el siglo I a. C. garantizó
   <p><strong>Principio de Funcionamiento</strong></p>
 El principio de funcionamiento del Cifrado César se fundamenta en la permutación por desplazamiento uniforme. Cada carácter del mensaje original (texto claro) es desplazado secuencialmente un número fijo de posiciones (k) a lo largo de un alfabeto de referencia predefinido.
 El comportamiento del algoritmo sigue tres reglas operativas clave:
-1.	Desplazamiento Constante: El parámetro k se aplica exactamente de la misma forma a cada una de las letras del mensaje.
-2.	Ciclicidad Aritmética (Módulo): Al alcanzar el límite superior del alfabeto (por ejemplo, al desplazar la última letra, la 'Z'), el conteo recomienza desde la primera posición ('A'). Esto se logra mediante la operación matemática de módulo sobre el tamaño del alfabeto (N).
-3.	Preservación de Caracteres No Alphabéticos: Por estándar técnico en implementación de software, los espacios en blanco, signos de puntuación, números y símbolos especiales suelen conservarse sin alteración dentro de la cadena cifrada para mantener la estructura legible del mensaje.
+<p>1.	Desplazamiento Constante: El parámetro k se aplica exactamente de la misma forma a cada una de las letras del mensaje.</p>
+<p>2.	Ciclicidad Aritmética (Módulo): Al alcanzar el límite superior del alfabeto (por ejemplo, al desplazar la última letra, la 'Z'), el conteo recomienza desde la primera posición ('A'). Esto se logra mediante la operación matemática de módulo sobre el tamaño del alfabeto (N).</p>
+<p>3.	Preservación de Caracteres No Alphabéticos: Por estándar técnico en implementación de software, los espacios en blanco, signos de puntuación, números y símbolos especiales suelen conservarse sin alteración dentro de la cadena cifrada para mantener la estructura legible del mensaje.</p>
 
     <p><strong>Proceso de Cifrado</strong></p>
 Para procesar el algoritmo de forma algorítmica y matemática, se realiza una asignación numérica secuencial a cada elemento del alfabeto, mapeándolo a un número entero en el rango de 0 a N−1:
