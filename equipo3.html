@@ -7,19 +7,19 @@
 </head>
 <body>
   <h2>Equipo 3 - Cifrado Cesar</h2>
-  <p>  Antecedentes Históricos
+  <p>  <p><strong>Antecedentes Históricos</strong></p>
 El Cifrado César es considerado una de las técnicas de criptografía más antiguas y representativas de la historia militar y política de la antigüedad. Su nombre rinde homenaje al estadista y general romano Julio César (100 a. C. – 44 a. C.), quien, de acuerdo con los registros del historiador romano Cayo Suetonio Tranquilo en su obra De vita Caesarum (Las vidas de los doce césares), utilizaba este sistema para proteger la correspondencia confidencial enviada a sus legiones y oficiales durante las Campañas de las Galias (alrededor del 58 a. C.).
 En la Roma antigua, la comunicación mediante mensajeros a caballo implicaba un alto riesgo de interceptación por parte de ejércitos enemigos o bandas de salteadores. Julio César adoptó una regla de sustitución fija basada en un desplazamiento de tres posiciones (k=3) sobre el alfabeto latino clásico (que en ese momento contaba con 21 letras, omitiendo letras como la J, U, W, Y, Z).
 Aunque hoy en día la técnica resulta elemental, en el siglo I a. C. garantizó una efectividad casi absoluta. La razón principal estriba en que la gran mayoría de los adversarios de Roma eran analfabetos y carecían de concepciones matemáticas sobre la codificación lingüística; aquellos pocos que sabían leer interpretaban las letras cifradas como palabras escritas en una lengua bárbara o desconocida.
     
-  Principio de Funcionamiento
+  <p><strong>Principio de Funcionamiento</strong></p>
 El principio de funcionamiento del Cifrado César se fundamenta en la permutación por desplazamiento uniforme. Cada carácter del mensaje original (texto claro) es desplazado secuencialmente un número fijo de posiciones (k) a lo largo de un alfabeto de referencia predefinido.
 El comportamiento del algoritmo sigue tres reglas operativas clave:
 1.	Desplazamiento Constante: El parámetro k se aplica exactamente de la misma forma a cada una de las letras del mensaje.
 2.	Ciclicidad Aritmética (Módulo): Al alcanzar el límite superior del alfabeto (por ejemplo, al desplazar la última letra, la 'Z'), el conteo recomienza desde la primera posición ('A'). Esto se logra mediante la operación matemática de módulo sobre el tamaño del alfabeto (N).
 3.	Preservación de Caracteres No Alphabéticos: Por estándar técnico en implementación de software, los espacios en blanco, signos de puntuación, números y símbolos especiales suelen conservarse sin alteración dentro de la cadena cifrada para mantener la estructura legible del mensaje.
 
-    Proceso de Cifrado
+    <p><strong>Proceso de Cifrado</strong></p>
 Para procesar el algoritmo de forma algorítmica y matemática, se realiza una asignación numérica secuencial a cada elemento del alfabeto, mapeándolo a un número entero en el rango de 0 a N−1:
 Alfabeto: [A=0,B=1,C=2,D=3,E=4,…,Z=25]
 Dado un carácter original en el texto claro representado por su índice numérico P y una clave k, el valor transformado C se obtiene formalmente mediante la ecuación:
@@ -44,7 +44,7 @@ A	0	(0+5)=5(mod26)	5	F
 D	3	(3+5)=8(mod26)	8	I
 •	Texto Cifrado resultante: XJLZWNIFI
 
- Proceso de Descifrado
+ <p><strong>Proceso de Descifrado</strong></p>
 El proceso de descifrado es la transformación inversa. Consiste en desplazar en sentido contrario (hacia la izquierda) cada carácter del texto cifrado C empleando la misma clave k.
 La formulación algebraica para la recuperación del valor numérico del carácter original P es:
 P=(C−k)(modN)
